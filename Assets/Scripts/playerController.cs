@@ -43,6 +43,12 @@ public class playerController : MonoBehaviour
                 Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 TryInteractWithTrash(clickPosition);
             }
+            else
+            {
+                // Single click detected
+                targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                isMovingToTarget = true;
+            }
 
             lastClickTime = Time.time; // Update the last click time
         }
