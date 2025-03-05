@@ -1,14 +1,23 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic; // For List<T>
 
 public class playerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
     public LayerMask foregroundLayer;
+    public float doubleClickTime = 0.3f; // Time window for double click
+    public float interactionRadius = 1f; // Radius for interacting with trash
+    public int score = 0; // Score variable
+
+    public Tilemap trashTilemap; // Reference to the tilemap containing trash tiles
+    public List<TileBase> trashTiles; // List of trash tiles (assign in Inspector)
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Vector2 targetPosition;
     private bool isMovingToTarget = false;
+    private float lastClickTime = 0f; // Track the time of the last click
 
     void Start()
     {
@@ -26,8 +35,16 @@ public class playerController : MonoBehaviour
         // click movement
         if (Input.GetMouseButtonDown(0))
         {
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            isMovingToTarget = true;
+            float timeSinceLastClick = Time.time - lastClickTime;
+
+            if (timeSinceLastClick <= doubleClickTime)
+            {
+                // Double click detected
+                Vector2 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                TryInteractWithTrash(clickPosition);
+            }
+
+            lastClickTime = Time.time; // Update the last click time
         }
     }
 
@@ -83,5 +100,28 @@ public class playerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(rb.position, moveDirection, moveDirection.magnitude, foregroundLayer);
         return hit.collider != null;
+    }
+
+    void TryInteractWithTrash(Vector2 clickPosition)
+    {
+        // Convert the click position to tilemap coordinates
+        Vector3Int cellPosition = trashTilemap.WorldToCell(clickPosition);
+
+        // Check if the clicked cell contains a trash tile
+        TileBase clickedTile = trashTilemap.GetTile(cellPosition);
+        if (clickedTile != null && trashTiles.Contains(clickedTile))
+        {
+            // Check if the player is close enough to the trash
+            Vector2 trashWorldPosition = trashTilemap.CellToWorld(cellPosition);
+            float distanceToTrash = Vector2.Distance(rb.position, trashWorldPosition);
+
+            if (distanceToTrash <= interactionRadius)
+            {
+                // Remove the trash tile
+                trashTilemap.SetTile(cellPosition, null);
+                score++; // Increment score
+                Debug.Log("Trash collected! Score: " + score);
+            }
+        }
     }
 }
