@@ -20,6 +20,18 @@ public class SquareController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = moveInput * moveSpeed;
+        Vector2 moveDirection = Vector2.zero;
+
+        if (Input.GetMouseButton(0))
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            moveDirection = (mousePosition - (Vector2)transform.position).normalized * moveSpeed;
+        }
+        else if (moveInput != Vector2.zero)
+        {
+            moveDirection = moveInput * moveSpeed;
+        }
+
+        rb.velocity = moveDirection;
     }
 }
