@@ -15,6 +15,8 @@ public class playerController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
     private Vector2 targetPosition;
     private bool isMovingToTarget = false;
     private float lastClickTime = 0f; // Track the time of the last click
@@ -22,6 +24,8 @@ public class playerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); // get spriterenderer component
+        animator = GetComponent<Animator>(); //get animator component
         targetPosition = rb.position; // start - current pos
     }
 
@@ -71,10 +75,24 @@ public class playerController : MonoBehaviour
         Vector2 moveDirection = moveInput * moveSpeed * Time.fixedDeltaTime;
         if (!IsCollidingWithForeground(moveDirection))
         {
+            //start running animation
+            animator.SetBool("isRunning", moveInput.magnitude > 0); //start running animation only during movement input
             rb.velocity = moveInput * moveSpeed; // move - no collision
+
+            //flip sprite based on movement direction
+            if (moveInput.x > 0)
+            {
+                spriteRenderer.flipX = false; //facing right
+            }
+            else if (moveInput.x < 0)
+            {
+                spriteRenderer.flipX = true; //facing left
+            }
+
         }
         else
         {
+            animator.SetBool("isRunning", false); //stop run animation
             rb.velocity = Vector2.zero; // collision
         }
     }
@@ -86,10 +104,22 @@ public class playerController : MonoBehaviour
         // collision check
         if (!IsCollidingWithForeground(moveDirection))
         {
+            animator.SetBool("isRunning", true); //start run animation
             rb.velocity = moveDirection * moveSpeed;
+
+            //flip sprite based on movement direction
+            if (moveDirection.x > 0)
+            {
+                spriteRenderer.flipX = false; //facing right
+            }
+            else if (moveDirection.x < 0)
+            {
+                spriteRenderer.flipX = true; //facing left
+            }
         }
         else
         {
+            animator.SetBool("isRunning", false); //stop run animation
             rb.velocity = Vector2.zero; // stop - collision
             isMovingToTarget = false;
         }
@@ -97,6 +127,7 @@ public class playerController : MonoBehaviour
         // stop movement when near target
         if (Vector2.Distance(rb.position, targetPosition) < 0.1f)
         {
+            animator.SetBool("isRunning", false); //stop run animation
             rb.velocity = Vector2.zero;
             isMovingToTarget = false;
         }

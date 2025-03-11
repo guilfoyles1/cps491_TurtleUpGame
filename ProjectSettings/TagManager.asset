@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Undefined
   - Trash
+  - TrashBin
+  - RecycleBin
   layers:
   - Default
   - TransparentFX
