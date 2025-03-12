@@ -8719,8 +8719,8 @@ Grid:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716866381}
   m_Enabled: 1
-  m_CellSize: {x: 1, y: 1, z: 0}
-  m_CellGap: {x: 0.03, y: 0.03, z: 0}
+  m_CellSize: {x: 0.9513, y: 1, z: 0}
+  m_CellGap: {x: 0.0287, y: 0.0352, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
 --- !u!4 &716866383
@@ -21454,7 +21454,7 @@ RectTransform:
   m_GameObject: {fileID: 2019279585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 903762430}
@@ -21468,7 +21468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -186.6, y: 80.649994}
+  m_AnchoredPosition: {x: -228, y: 90}
   m_SizeDelta: {x: 366.1, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2019279587
