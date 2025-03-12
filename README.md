@@ -1,39 +1,79 @@
 # Turtle Up Edutainment Game
 
 ## Overview
-Turtle Up is an edutainment game designed for the Turtle Up recycling center's educational initiative in Kokrobite, Ghana. This interactive experience aims to raise awareness about sea turtle conservation through engaging, informative gameplay. Players will take on both human and turtle perspectives to understand the challenges sea turtles face and the impact of responsible waste management.
+Turtle Up is an edutainment game developed for the Turtle Up recycling center in Kokrobite, Ghana. The game is designed to raise awareness about sea turtle conservation through interactive gameplay, combining education and entertainment. Players will experience both **human** and **turtle** perspectives, learning about the impact of pollution on marine life and the importance of proper waste disposal.
 
-## Gameplay
-The game is structured into two perspectives:
+## Features
+- **Two Gameplay Perspectives:**
+  - **Human (Level 1):** Collect and sort trash, navigate obstacles, and help maintain a clean beach environment.
+  - **Turtle (Level 2):** Scavenge for food while avoiding plastic waste, illustrating the challenges sea turtles face.
+- **Character Customization:** Players can select from five native turtle species and a variety of human avatars.
+- **Inventory System:** Tracks collected trash and allows for proper disposal at designated bins.
+- **Educational Integration:** Pop-up learning moments and visuals demonstrate conservation best practices.
+- **Mobile Compatibility:** Click-to-move functionality ensures a smooth experience on touchscreen devices.
 
-- **Human Perspective (Level 1):**  
-  Players will collect and sort trash, navigate obstacles, and learn about the effects of pollution on marine habitats.
+## Installation & Setup
 
-- **Turtle Perspective (Level 2):**  
-  Players will control a sea turtle, scavenging for food while avoiding plastic and other threats, illustrating the direct impact of human waste on wildlife.
+### Prerequisites
+Ensure you have the following installed:
+- **Unity 2022.3+** (LTS recommended)
+- **Git** (for version control)
+- **Text Editor** (VS Code, Rider, or preferred IDE)
 
-## Key Features
-- **Character Customization:** Players can choose from five native turtle species and a diverse set of human avatars to ensure inclusive representation.
-- **Interactive Learning:** The game incorporates pop-up facts and visual guides to reinforce educational themes about sea turtle conservation and responsible waste disposal.
-- **Dynamic Gameplay:** Players will complete challenges like trash collection, sorting, and navigating environmental hazards to progress through the game.
-- **Optimized for Accessibility:** Click-to-move functionality is available for mobile users, ensuring smooth gameplay across different devices.
+### Cloning the Repository
+To clone the project, run:
+```bash
+git clone https://github.com/guilfoyles1/cps491group14.git
+```
 
-## Current Progress
-- **Core Mechanics Implemented:**  
-  Player movement (WASD, arrow keys, and click-to-move), trash collection, and inventory tracking are functional.
+Navigate to the project folder:
+```bash
+cd cps491group14
+```
+## Opening in Unity
+1. Open **Unity Hub**.
+2. Click **Add Project** and select the cloned repository.
+3. Ensure your Unity version matches the project's required version.
+4. Open the project and allow it to load dependencies.
 
-- **Character Customization In Progress:**  
-  Preset character selection system is being developed to allow players to choose their avatar.
+---
 
-- **UI & Visuals:**  
-  The inventory system and other UI components are being refined for usability.
+## Development & Contributions
 
-- **Educational Features Planned:**  
-  Visual prompts and pop-ups will teach players about proper waste disposal and conservation efforts.
+### Branching & Version Control
+- **Main Branch:** Stable version of the game.
+- **Feature Branches:** New features and bug fixes should be developed in separate branches before merging.
+- **Commit Guidelines:** Use clear commit messages (e.g., `fix: resolved collision bug in level 1`).
+
+### Running the Game
+1. Open the project in **Unity**.
+2. In the **Hierarchy**, select `Scenes/BeachLevel` (or appropriate scene).
+3. Press **Play** in the Unity editor.
+
+### Reporting Issues
+If you encounter a bug, create an issue on the repository with:
+- **A clear description**
+- **Steps to reproduce**
+- **Screenshots (if applicable)**
+
+---
+
+## Current Development Progress
+- **Implemented:**
+  - Player movement (WASD, arrow keys, click-to-move)
+  - Trash collection and inventory tracking
+- **In Progress:**
+  - Character customization
+  - UI refinements
+  - Recycling/trash bin interactions
+- **Upcoming:**
+  - Educational overlays and pop-ups for conservation messaging
+
+---
 
 ## Team Members
-- **Shayna I. Guilfoyle** - Team Lead - [guilfoyles1@udayton.edu](mailto:guilfoyles1@udayton.edu)
 - **Shani D. Patel** - Backend Development - [patels44@udayton.edu](mailto:patels44@udayton.edu)
 - **Saif Ullah** - Backend Development - [ullahs3@udayton.edu](mailto:ullahs3@udayton.edu)
+- **Shayna I. Guilfoyle** - Team Lead - [guilfoyles1@udayton.edu](mailto:guilfoyles1@udayton.edu)
 - **Lazar Jevtic** - Frontend Design/Development - [jevticl1@udayton.edu](mailto:jevticl1@udayton.edu)
 - **Zachary R. Spears** - Backend Development - [spearsz2@udayton.edu](mailto:spearsz2@udayton.edu)
