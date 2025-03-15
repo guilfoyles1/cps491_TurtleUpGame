@@ -11,6 +11,8 @@ public class PlayerInventory : MonoBehaviour
 
     private int currentSlot = 0; // Track the next available slot
 
+    public PickupUI pickup;
+
 
     private void Update()
     {
@@ -34,6 +36,7 @@ public class PlayerInventory : MonoBehaviour
                 if (tileSprite != null)
                 {
                     AddToInventory(tileSprite); // Add to inventory
+                    pickup.ShowPickup(tileSprite, "+1 trash");
                 }
             }
 
@@ -60,6 +63,9 @@ public class PlayerInventory : MonoBehaviour
             itemImage.sprite = itemSprite;
             itemImage.enabled = true;
 
+            // Adjust the image size to match the sprite's original size
+            SetImageSize(itemImage, itemSprite);
+
             StartCoroutine(FlashSlot(slot.GetComponent<Image>())); // Flash effect
 
             currentSlot++;
@@ -67,6 +73,23 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             Debug.Log("Inventory is full!");
+        }
+    }
+
+    private void SetImageSize(Image image, Sprite sprite)
+    {
+        if (sprite != null)
+        {
+            image.SetNativeSize(); // Ensures the image matches the sprite's original size
+
+            // Optional: Scale down if the image is too big for the UI
+            float maxSize = 50f; // Adjust this value to fit your UI slot size
+            float scale = Mathf.Min(maxSize / sprite.texture.width, maxSize / sprite.texture.height);
+
+            image.rectTransform.sizeDelta = new Vector2(
+                sprite.texture.width * scale,
+                sprite.texture.height * scale
+            );
         }
     }
 
