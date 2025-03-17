@@ -3,34 +3,37 @@ using UnityEngine;
 public class myController : MonoBehaviour
 {
     public float walkSpeed = 4f;
-    public float runSpeed = 7f; // Faster sprint speed
+    public float runSpeed = 7f;
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 movement;
-    private Vector2 lastMoveDirection = Vector2.down; // Default facing down
+    private Vector2 lastMoveDirection = Vector2.down;
+
+    private GroundChecker groundChecker; // Reference to GroundChecker
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        groundChecker = GetComponent<GroundChecker>(); // Get the GroundChecker instance
     }
 
     void Update()
     {
-        // Get input
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-
-        // Normalize movement to prevent diagonal speed boost
         movement = movement.normalized;
 
-        // Sprinting when holding Left Shift
         bool isRunning = Input.GetKey(KeyCode.LeftShift) && movement != Vector2.zero;
 
-        // If moving, update lastMoveDirection
         if (movement != Vector2.zero)
         {
             lastMoveDirection = movement;
+            groundChecker.PlayWalkSound();
+        }
+        else
+        {
+            groundChecker.StopWalkSound();
         }
 
         // Handle animation states
@@ -58,9 +61,9 @@ public class myController : MonoBehaviour
         animator.SetFloat("moveY", lastMoveDirection.y);
     }
 
+
     void FixedUpdate()
     {
-        // Apply movement speed (running or walking)
         float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
         rb.velocity = movement * speed;
     }

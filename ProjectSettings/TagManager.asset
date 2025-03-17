@@ -8,6 +8,9 @@ TagManager:
   - Trash
   - TrashBin
   - RecycleBin
+  - Grass
+  - Wood
+  - Sand
   layers:
   - Default
   - TransparentFX
