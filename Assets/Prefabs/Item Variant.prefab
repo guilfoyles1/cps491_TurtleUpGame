@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7454795803209815215, guid: 216c3db2149981a4ba9e9b77f443957f, type: 3}
+      propertyPath: Name
+      value: Glass Bottle
+      objectReference: {fileID: 0}
     - target: {fileID: -6086041297732506237, guid: 216c3db2149981a4ba9e9b77f443957f, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -15,7 +19,7 @@ PrefabInstance:
     - target: {fileID: -4153518421221210041, guid: 216c3db2149981a4ba9e9b77f443957f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2d742f982558a8b449961bf5e563950c, type: 3}
+      objectReference: {fileID: 21300000, guid: 020a3fc479cafa040afc3d8e121672b4, type: 3}
     - target: {fileID: 3478372939809346444, guid: 216c3db2149981a4ba9e9b77f443957f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
