@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 505860385}
   - component: {fileID: 505860384}
   - component: {fileID: 505860383}
+  - component: {fileID: 505860386}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -552,6 +553,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505860381}
   m_CullTransparentMesh: 1
+--- !u!114 &505860386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505860381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4, y: 4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &585025507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,6 +1154,7 @@ GameObject:
   - component: {fileID: 1723840090}
   - component: {fileID: 1723840089}
   - component: {fileID: 1723840092}
+  - component: {fileID: 1723840093}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1234,7 +1251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.764151, g: 0.720205, b: 0.19103774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1271,6 +1288,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be79b4398aeea64ca7dab8ebafc2433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1723840093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723840087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 4, y: 4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1804623727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,6 +1449,7 @@ GameObject:
   - component: {fileID: 1866734561}
   - component: {fileID: 1866734560}
   - component: {fileID: 1866734559}
+  - component: {fileID: 1866734562}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -1526,6 +1559,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866734557}
   m_CullTransparentMesh: 1
+--- !u!114 &1866734562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866734557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 4, y: 4}
+  m_UseGraphicAlpha: 1
 --- !u!1 &2021447760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,15 +1633,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d73f4beca2d444446b489ea460cb09c0, type: 2}
+  m_sharedMaterial: {fileID: 8739321902790098806, guid: d73f4beca2d444446b489ea460cb09c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288651179
-  m_fontColor: {r: 0.6698113, g: 0.622419, b: 0.622419, a: 1}
+    rgba: 4283064679
+  m_fontColor: {r: 0.4056604, g: 0.38231578, b: 0.28893736, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 1
   m_fontColorGradient:
@@ -1610,15 +1658,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
-  m_fontSizeBase: 24
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 55
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 7
   m_wordSpacing: 0

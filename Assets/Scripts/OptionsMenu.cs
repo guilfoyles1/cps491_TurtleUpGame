@@ -1,11 +1,14 @@
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
     public GameObject optionsPanel; // Drag your UI Image (Panel) here
     public GameObject settingsPanel;
+
+    public GameObject optionsButton;
 
     private bool isMenuOpen = false;
 
@@ -22,7 +25,6 @@ public class OptionsMenu : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ToggleMenu();
-            settingsPanel.SetActive(false);
         }
     }
 
@@ -30,14 +32,16 @@ public class OptionsMenu : MonoBehaviour
     {
         if (optionsPanel != null)
         {
+            optionsButton.SetActive(isMenuOpen);
             isMenuOpen = !isMenuOpen;
             optionsPanel.SetActive(isMenuOpen);
+            settingsPanel.SetActive(false);
         }
     }
-
     public void EnterSettings()
     {
         optionsPanel.SetActive(false);
+        isMenuOpen = !isMenuOpen;
         settingsPanel.SetActive(true);
 
     }
