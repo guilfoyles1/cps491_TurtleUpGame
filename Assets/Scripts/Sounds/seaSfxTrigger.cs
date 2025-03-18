@@ -6,6 +6,9 @@ public class SeaSFXTrigger : MonoBehaviour
     public float fadeSpeed = .25f; // Speed at which volume changes
     private float targetVolume = 0f; // Desired volume level
 
+    public float playerSetVolume;
+
+    private bool inArea = false;
     void Start()
     {
         if (seaAudioSource != null)
@@ -29,15 +32,28 @@ public class SeaSFXTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            targetVolume = .175f; // Set target volume to full
+            targetVolume = playerSetVolume; // Set target volume to full
+            inArea = true;
         }
     }
+
+    public void setVolume()
+    {
+        if (inArea)
+        {
+            seaAudioSource.volume = playerSetVolume;
+            targetVolume = playerSetVolume;
+        }
+    }
+
+
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             targetVolume = 0f; // Set target volume to zero
+            inArea = false;
         }
     }
 }

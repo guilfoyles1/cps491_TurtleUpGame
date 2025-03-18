@@ -1,0 +1,60 @@
+using JetBrains.Annotations;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class OptionsMenu : MonoBehaviour
+{
+    public GameObject optionsPanel; // Drag your UI Image (Panel) here
+    public GameObject settingsPanel;
+
+    private bool isMenuOpen = false;
+
+    void Start()
+    {
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false); // Ensure menu starts hidden
+        if (settingsPanel != null)
+            settingsPanel.SetActive(false);
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleMenu();
+            settingsPanel.SetActive(false);
+        }
+    }
+
+    public void ToggleMenu()
+    {
+        if (optionsPanel != null)
+        {
+            isMenuOpen = !isMenuOpen;
+            optionsPanel.SetActive(isMenuOpen);
+        }
+    }
+
+    public void EnterSettings()
+    {
+        optionsPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+
+    }
+
+    public void EnterMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+}
+

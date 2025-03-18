@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GroundChecker : MonoBehaviour
 {
+    public GameObject player;
     public AudioSource walkSrc;   // For step sounds
     public AudioClip grassWalkSFX;
     public AudioClip sandWalkSFX;
@@ -24,7 +25,7 @@ public class GroundChecker : MonoBehaviour
     {
         foreach (Tilemap tilemap in tilemaps)
         {
-            Vector3Int tilePosition = tilemap.WorldToCell(transform.position); // Convert to Tilemap grid position
+            Vector3Int tilePosition = tilemap.WorldToCell(player.transform.position); // Convert to Tilemap grid position
             TileBase tile = tilemap.GetTile(tilePosition); // Get the tile at that position
 
             if (tile != null) // If a tile exists in this Tilemap, use its tag

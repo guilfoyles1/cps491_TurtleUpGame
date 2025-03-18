@@ -9,13 +9,12 @@ public class myController : MonoBehaviour
     private Vector2 movement;
     private Vector2 lastMoveDirection = Vector2.down;
 
-    private GroundChecker groundChecker; // Reference to GroundChecker
+    public GroundChecker groundChecker; // Reference to GroundChecker
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        groundChecker = GetComponent<GroundChecker>(); // Get the GroundChecker instance
     }
 
     void Update()
