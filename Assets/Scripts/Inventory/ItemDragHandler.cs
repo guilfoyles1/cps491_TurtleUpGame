@@ -30,7 +30,7 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         canvasGroup.blocksRaycasts = true; //enables raycast
         canvasGroup.alpha = 1f;
 
-        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>();
+        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>(); //slot where item is dropped
 
         if (dropSlot == null)
         {
