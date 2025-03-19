@@ -84,7 +84,7 @@ public class SettingsMenu : MonoBehaviour
     {
         if (seaSFXTrigger != null)
         {
-            seaSFXTrigger.playerSetVolume = mainVolumeSlider.value;
+            seaSFXTrigger.playerSetVolume = mainVolumeSlider.value - .2f;
             seaSFXTrigger.setVolume();
         }
         forestSFX.volume = mainVolumeSlider.value;
