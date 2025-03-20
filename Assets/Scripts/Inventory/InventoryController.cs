@@ -5,16 +5,45 @@ using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
 {
-    public GameObject inventoryPanel;
+    public GameObject inventoryPanel; // Player's inventory
+    public GameObject binInventoryPanel; // Chest inventory
     public GameObject slotPrefab;
     public int slotCount;
     public GameObject[] itemPrefabs;
 
+    // Global list to track all slots across multiple inventories
+    public static List<Slot> allInventorySlots = new List<Slot>();
+
     void Start()
+    {
+        // Initialize player inventory
+        InitializeInventory(inventoryPanel);
+
+        // Initialize chest inventory
+        if (binInventoryPanel != null)
+        {
+            InitializeInventory(binInventoryPanel);
+        }
+    }
+
+    void Update()
+    {
+        // Check if the player presses 'F' and delete items in bin inventory
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ClearBinInventory();
+        }
+    }
+
+    private void InitializeInventory(GameObject inventory)
     {
         for (int i = 0; i < slotCount; i++)
         {
-            Slot slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<Slot>();
+            Slot slot = Instantiate(slotPrefab, inventory.transform).GetComponent<Slot>();
+
+            // Add to global list of slots
+            allInventorySlots.Add(slot);
+
             if (i < itemPrefabs.Length)
             {
                 GameObject item = Instantiate(itemPrefabs[i], slot.transform);
@@ -30,9 +59,8 @@ public class InventoryController : MonoBehaviour
 
     public bool AddItem(GameObject itemPrefab)
     {
-        foreach (Transform slotTransform in inventoryPanel.transform)
+        foreach (Slot slot in allInventorySlots)
         {
-            Slot slot = slotTransform.GetComponent<Slot>();
             if (slot != null && slot.currentItem == null)
             {
                 GameObject newItem = Instantiate(itemPrefab, slot.transform);
@@ -67,4 +95,25 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void ClearBinInventory()
+    {
+        if (binInventoryPanel == null)
+        {
+            Debug.LogWarning("Bin inventory panel not set!");
+            return;
+        }
+
+        // Iterate through all slots in the bin inventory and delete items
+        foreach (Transform slotTransform in binInventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot != null && slot.currentItem != null)
+            {
+                Destroy(slot.currentItem); // Delete the item
+                slot.currentItem = null; // Clear the reference
+            }
+        }
+
+        Debug.Log("Bin inventory cleared!");
+    }
 }
