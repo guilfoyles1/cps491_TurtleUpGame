@@ -10,10 +10,9 @@ public class ItemPickUpUIController : MonoBehaviour
 
     public GameObject popupPrefab;
     public int maxPopups = 5;
-    public float popupDuration = 3f;
+    public float popupDuration;
 
     private readonly Queue<GameObject> activePopups = new();
-    private readonly Queue<GameObject> popupPool = new(); // Pool for UI popups
 
     private void Awake()
     {
@@ -23,69 +22,46 @@ public class ItemPickUpUIController : MonoBehaviour
         }
         else
         {
+            Debug.LogError("Multiple ItemPickUpUIManager instances detected! Destroying the extra one.");
             Destroy(gameObject);
-        }
-
-        // Pre-instantiate popups to prevent lag
-        for (int i = 0; i < maxPopups; i++)
-        {
-            GameObject popup = Instantiate(popupPrefab, transform);
-            popup.SetActive(false);
-            popupPool.Enqueue(popup);
         }
     }
 
     public void ShowItemPickup(string itemName, Sprite itemIcon)
     {
-        GameObject newPopup;
-
-        // Reuse an inactive popup from the pool instead of instantiating a new one
-        if (popupPool.Count > 0)
-        {
-            newPopup = popupPool.Dequeue();
-        }
-        else
-        {
-            // If no available popup in pool, create a new one (but this should be rare)
-            newPopup = Instantiate(popupPrefab, transform);
-        }
-
-        // Set popup details
+        GameObject newPopup = Instantiate(popupPrefab, transform);
         newPopup.GetComponentInChildren<TMP_Text>().text = itemName;
-        UnityEngine.UI.Image itemImage = newPopup.transform.Find("ItemIcon")?.GetComponent<UnityEngine.UI.Image>();
+
+        Image itemImage = newPopup.transform.Find("ItemIcon")?.GetComponent<Image>();
         if (itemImage)
         {
             itemImage.sprite = itemIcon;
         }
 
-        newPopup.SetActive(true);
         activePopups.Enqueue(newPopup);
-
-        // If there are too many popups, deactivate and reuse the oldest one
         if (activePopups.Count > maxPopups)
         {
-            GameObject oldPopup = activePopups.Dequeue();
-            oldPopup.SetActive(false);
-            popupPool.Enqueue(oldPopup);
+            Destroy(activePopups.Dequeue());
         }
 
-        StartCoroutine(FadeOutAndDeactivate(newPopup));
+        // Fade out and destroy
+        StartCoroutine(FadeOutAndDestroy(newPopup));
     }
 
-    private IEnumerator FadeOutAndDeactivate(GameObject popup)
+    private IEnumerator FadeOutAndDestroy(GameObject popup)
     {
-        CanvasGroup canvasGroup = popup.GetComponent<CanvasGroup>();
-        if (canvasGroup == null) yield break;
+        yield return new WaitForSeconds(popupDuration);
+        if (popup == null) yield break;
 
-        float duration = popupDuration; // Fade duration
-        for (float timePassed = 0f; timePassed < duration; timePassed += Time.deltaTime)
+        CanvasGroup canvasGroup = popup.GetComponent<CanvasGroup>();
+        for (float timePassed = 0f; timePassed < 1f; timePassed += Time.deltaTime)
         {
-            canvasGroup.alpha = 1f - (timePassed / duration);
+            if (popup == null) yield break;
+            canvasGroup.alpha = 1f - timePassed;
             yield return null;
         }
 
-        // After fade out, disable popup instead of destroying it
-        popup.SetActive(false);
-        popupPool.Enqueue(popup);
+        Destroy(popup);
     }
+
 }

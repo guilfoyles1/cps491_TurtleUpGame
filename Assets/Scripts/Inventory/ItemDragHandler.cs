@@ -1,36 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Transform originalParent;
-    CanvasGroup canvasGroup;
+    private Transform originalParent;
+    private CanvasGroup canvasGroup;
+    private GameObject draggedItem;
+
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        originalParent = transform.parent; //save og parent
-        transform.SetParent(transform.root); // above other canvas
-        canvasGroup.blocksRaycasts = false;
-        canvasGroup.alpha = 0.6f; // semi transparent during drag
+        Slot slot = GetComponent<Slot>();
+        if (slot == null || slot.currentItem == null)
+            return; // No item in slot, so don't drag
+
+        draggedItem = slot.currentItem; // Store reference to the item
+        originalParent = draggedItem.transform.parent; // Save original parent slot
+
+        draggedItem.transform.SetParent(transform.root); // Move item above other UI elements
+        draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = false;
+        draggedItem.GetComponent<CanvasGroup>().alpha = 0.6f; // Semi-transparent during drag
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = eventData.position; //follow mouse
+        if (draggedItem == null) return;
+        draggedItem.transform.position = eventData.position; // Move the item with the cursor
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true; //enables raycast
-        canvasGroup.alpha = 1f;
+        if (draggedItem == null) return;
 
-        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>(); //slot where item is dropped
+        draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        draggedItem.GetComponent<CanvasGroup>().alpha = 1f;
+
+        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>();
 
         if (dropSlot == null)
         {
@@ -40,13 +51,14 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 dropSlot = item.GetComponentInParent<Slot>();
             }
         }
+
         Slot originalSlot = originalParent.GetComponent<Slot>();
 
         if (dropSlot != null)
         {
             if (dropSlot.currentItem != null)
             {
-                //slot has items - swap
+                // Swap items between slots
                 dropSlot.currentItem.transform.SetParent(originalSlot.transform);
                 originalSlot.currentItem = dropSlot.currentItem;
                 dropSlot.currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -55,16 +67,16 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             {
                 originalSlot.currentItem = null;
             }
-            //move item into drop slot
-            transform.SetParent(dropSlot.transform);
-            dropSlot.currentItem = gameObject;
+            // Move dragged item into the drop slot
+            draggedItem.transform.SetParent(dropSlot.transform);
+            dropSlot.currentItem = draggedItem;
         }
         else
         {
-            //no slot under drop point
-            transform.SetParent(originalParent);
+            // No valid drop slot, return item to its original slot
+            draggedItem.transform.SetParent(originalParent);
         }
-        GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
 
+        draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+    }
 }
