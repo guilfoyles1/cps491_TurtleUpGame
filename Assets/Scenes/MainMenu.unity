@@ -916,8 +916,6 @@ MonoBehaviour:
   musicSource: {fileID: 1146800469}
   musicTracks:
   - {fileID: 8300000, guid: 68ce0e790dc3b0d419fc4a591cabf4af, type: 3}
-  - {fileID: 8300000, guid: 47c7b1ab4ca45484eaa69c6ad5523425, type: 3}
-  - {fileID: 8300000, guid: a59c21817e98118429fbfd1c921100b9, type: 3}
   minPauseTime: 10
   maxPauseTime: 30
 --- !u!82 &1146800469
@@ -2260,7 +2258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   img: {fileID: 2031411389}
-  x: 0.002
+  x: 0.05
   y: 0
 --- !u!114 &2031411389
 MonoBehaviour:

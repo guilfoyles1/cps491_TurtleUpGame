@@ -6,6 +6,7 @@ public class PlayerItemCollector : MonoBehaviour
 {
     // Start is called before the first frame update
     private InventoryController inventoryController;
+    public AudioSource pickupSFX;
     void Start()
     {
         inventoryController = FindObjectOfType<InventoryController>();
@@ -23,6 +24,8 @@ public class PlayerItemCollector : MonoBehaviour
                 if (itemAdded)
                 {
                     item.PickUp();
+                    pickupSFX.pitch = Random.Range(1f, 2f);
+                    pickupSFX.Play();
                     Destroy(collision.gameObject);
                 }
             }

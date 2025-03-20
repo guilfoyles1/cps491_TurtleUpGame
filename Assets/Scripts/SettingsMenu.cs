@@ -90,7 +90,7 @@ public class SettingsMenu : MonoBehaviour
         forestSFX.volume = mainVolumeSlider.value;
         waterfallSFX.volume = mainVolumeSlider.value;
         fireSFX.volume = mainVolumeSlider.value;
-        walkSFX.volume = mainVolumeSlider.value - .3f;
+        walkSFX.volume = mainVolumeSlider.value - .2f;
         musicSFX.volume = Mathf.Clamp(musicVolumeSlider.value * .25f, 0f, 1f);
     }
 }

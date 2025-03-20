@@ -12,13 +12,6 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-
-        // Ensure this slot is added to the global slot list
-        Slot slot = GetComponent<Slot>();
-        if (slot != null && !InventoryController.allInventorySlots.Contains(slot))
-        {
-            InventoryController.allInventorySlots.Add(slot);
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -56,20 +49,6 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             if (item != null)
             {
                 dropSlot = item.GetComponentInParent<Slot>();
-            }
-        }
-
-        // If no valid drop slot is found, check across all inventories
-        if (dropSlot == null)
-        {
-            foreach (Slot slot in InventoryController.allInventorySlots)
-            {
-                if (RectTransformUtility.RectangleContainsScreenPoint(
-                    slot.GetComponent<RectTransform>(), Input.mousePosition))
-                {
-                    dropSlot = slot;
-                    break;
-                }
             }
         }
 
