@@ -42,46 +42,47 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         if (draggedItem == null) return;
 
-        draggedItem.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        draggedItem.GetComponent<CanvasGroup>().alpha = 1f;
-
-        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>();
-
-        if (dropSlot == null)
-        {
-            GameObject item = eventData.pointerEnter;
-            if (item != null)
-            {
-                dropSlot = item.GetComponentInParent<Slot>();
-            }
-        }
+        var canvasGroup = draggedItem.GetComponent<CanvasGroup>();
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
 
         Slot originalSlot = originalParent.GetComponent<Slot>();
+        Slot dropSlot = eventData.pointerEnter?.GetComponent<Slot>();
 
-        if (dropSlot != null)
+        if (dropSlot == null && eventData.pointerEnter != null)
         {
+            dropSlot = eventData.pointerEnter.GetComponentInParent<Slot>();
+        }
+
+        if (dropSlot != null && dropSlot != originalSlot)
+        {
+            // Clear original slot
+            originalSlot.currentItem = null;
+
             if (dropSlot.currentItem != null)
             {
-                // Swap items between slots
+                // Swap: move the existing item to original slot
                 dropSlot.currentItem.transform.SetParent(originalSlot.transform);
-                originalSlot.currentItem = dropSlot.currentItem;
                 dropSlot.currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                originalSlot.currentItem = dropSlot.currentItem;
             }
-            else
-            {
-                originalSlot.currentItem = null;
-            }
-            // Move dragged item into the drop slot
+
+            // Move dragged item to new slot
             draggedItem.transform.SetParent(dropSlot.transform);
+            draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             dropSlot.currentItem = draggedItem;
         }
         else
         {
+            // Dropped outside or back to original slot
             draggedItem.transform.SetParent(originalParent);
+            draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            originalSlot.currentItem = draggedItem;
         }
 
-        draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        draggedItem = null;
     }
+
 
 
 }
