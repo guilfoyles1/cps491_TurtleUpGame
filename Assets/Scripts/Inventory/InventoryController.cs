@@ -12,6 +12,7 @@ public class InventoryController : MonoBehaviour
     public GameObject paperBin;
     public GameObject trashBin;
     public GameObject slotPrefab;
+    public float maxSlotDimension = 70f;
     public int slotCount;
     //public GameObject[] itemPrefabs;
 
@@ -71,7 +72,7 @@ public class InventoryController : MonoBehaviour
         if (image != null && image.sprite != null)
         {
             Vector2 spriteSize = image.sprite.bounds.size;
-            float maxSlotSize = 87f; // Max size for width/height
+            float maxSlotSize = maxSlotDimension; // Max size for width/height
 
             // Calculate the scale factor based on the larger dimension
             float scaleFactor = maxSlotSize / Mathf.Max(spriteSize.x, spriteSize.y);
