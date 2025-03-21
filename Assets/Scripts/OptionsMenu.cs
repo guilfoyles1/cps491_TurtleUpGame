@@ -10,6 +10,10 @@ public class OptionsMenu : MonoBehaviour
 
     public GameObject optionsButton;
 
+    public AudioSource uiSounds;
+    public AudioClip swipeSound;
+    public AudioClip clickSound;
+
     private bool isMenuOpen = false;
 
     void Start()
@@ -36,6 +40,8 @@ public class OptionsMenu : MonoBehaviour
             isMenuOpen = !isMenuOpen;
             optionsPanel.SetActive(isMenuOpen);
             settingsPanel.SetActive(false);
+            uiSounds.clip = swipeSound;
+            uiSounds.Play();
         }
     }
     public void EnterSettings()
@@ -43,6 +49,8 @@ public class OptionsMenu : MonoBehaviour
         optionsPanel.SetActive(false);
         isMenuOpen = !isMenuOpen;
         settingsPanel.SetActive(true);
+        uiSounds.clip = swipeSound;
+        uiSounds.Play();
 
     }
 
@@ -60,5 +68,12 @@ public class OptionsMenu : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void PlayClickSound()
+    {
+        uiSounds.clip = clickSound;
+        uiSounds.Play();
+    }
+
 }
 
