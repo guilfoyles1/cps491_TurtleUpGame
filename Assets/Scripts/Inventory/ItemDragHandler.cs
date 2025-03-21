@@ -8,14 +8,18 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private Transform originalParent;
     private CanvasGroup canvasGroup;
     private GameObject draggedItem;
+    private AudioSource inventorySFX;
 
     void Start()
     {
+        inventorySFX = GetComponent<AudioSource>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        inventorySFX.pitch = Random.Range(.5f, 1f);
+        inventorySFX.Play();
         Slot slot = GetComponent<Slot>();
         if (slot == null || slot.currentItem == null)
             return; // No item in slot, so don't drag
@@ -73,10 +77,47 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
         else
         {
-            // No valid drop slot, return item to its original slot
+            // // If outside of inventory, drop trash bin logic
+            // if (!IsWithinInventory(eventData.position))
+            // {
+            //     bool binWithinPlayer = true;
+            //     if (binWithinPlayer)
+            //     {
+            //         // Get the bin type
+            //         string binType = "Glass"; // get the tag
+            //         DropItem(originalSlot, binType);
+            //     }
+            // }
+            // else
+            // {
+            //     // No valid drop slot, return item to its original slot
+            //     draggedItem.transform.SetParent(originalParent);
+            // }
             draggedItem.transform.SetParent(originalParent);
+
         }
 
         draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
     }
+
+    // bool IsWithinInventory(Vector2 mousePosition)
+    // {
+    //     RectTransform inventoryRect = originalParent.parent.GetComponent<RectTransform>();
+    //     return RectTransformUtility.RectangleContainsScreenPoint(inventoryRect, mousePosition);
+    // }
+
+    // void DropItem(Slot originalSlot, string binType)
+    // {
+    //     //if bin type is dragged item type
+    //     if (binType == draggedItem.tag)
+    //     {
+    //         Debug.Log("correct trash placed");
+    //     }
+    //     else
+    //     {
+    //         Debug.Log("incorrect trash placed");
+    //     }
+    //     Destroy(draggedItem);
+    //     originalSlot.currentItem = null;
+    // }
 }

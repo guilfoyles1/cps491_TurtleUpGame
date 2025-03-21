@@ -7,11 +7,14 @@ TagManager:
   - Undefined
   - Trash
   - TrashBin
-  - RecycleBin
   - Grass
   - Wood
   - Sand
   - Item
+  - GlassBin
+  - PlasticBin
+  - MetalBin
+  - PaperBin
   layers:
   - Default
   - TransparentFX
@@ -19,18 +22,18 @@ TagManager:
   - 
   - Water
   - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - player
-  - 
   - foreground
-  - 
   - background
-  - 
   - icon
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
