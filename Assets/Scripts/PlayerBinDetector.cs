@@ -49,7 +49,10 @@ public class PlayerBinDetector : MonoBehaviour
     private void SetOnlyCurrentBinActive(string tag)
     {
         foreach (var bin in binMap.Values)
-            bin.SetActive(false);
+        {
+            if (bin != null)
+                bin.SetActive(false);
+        }
 
         if (binMap.ContainsKey(tag))
             binMap[tag].SetActive(true);
