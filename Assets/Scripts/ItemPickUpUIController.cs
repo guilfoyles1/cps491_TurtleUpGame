@@ -12,6 +12,8 @@ public class ItemPickUpUIController : MonoBehaviour
     public int maxPopups = 5;
     public float popupDuration;
 
+    public float maxSlotDimension = 70f;
+
     private readonly Queue<GameObject> activePopups = new();
 
     private void Awake()
@@ -36,6 +38,7 @@ public class ItemPickUpUIController : MonoBehaviour
         if (itemImage)
         {
             itemImage.sprite = itemIcon;
+            SetItemSizeToSprite(itemImage.gameObject);
         }
 
         activePopups.Enqueue(newPopup);
@@ -62,6 +65,24 @@ public class ItemPickUpUIController : MonoBehaviour
         }
 
         Destroy(popup);
+    }
+
+    private void SetItemSizeToSprite(GameObject item)
+    {
+        Image image = item.GetComponent<Image>();
+        RectTransform rectTransform = item.GetComponent<RectTransform>();
+
+        if (image != null && image.sprite != null)
+        {
+            Vector2 spriteSize = image.sprite.bounds.size;
+            float maxSlotSize = maxSlotDimension; // Max size for width/height
+
+            // Calculate the scale factor based on the larger dimension
+            float scaleFactor = maxSlotSize / Mathf.Max(spriteSize.x, spriteSize.y);
+
+            // Apply the scale while maintaining the aspect ratio
+            rectTransform.sizeDelta = new Vector2(spriteSize.x * scaleFactor, spriteSize.y * scaleFactor);
+        }
     }
 
 }

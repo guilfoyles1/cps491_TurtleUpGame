@@ -18,6 +18,10 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (SettingsMenu.Instance != null)
+        {
+            inventorySFX.volume = SettingsMenu.Instance.mainVolumeSlider.value - 0.3f;
+        }
         inventorySFX.pitch = Random.Range(.5f, 1f);
         inventorySFX.Play();
         Slot slot = GetComponent<Slot>();

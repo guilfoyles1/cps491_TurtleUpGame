@@ -13,15 +13,33 @@ public class SettingsMenu : MonoBehaviour
     public AudioSource waterfallSFX;
     public AudioSource fireSFX;
     public AudioSource walkSFX;
+    public AudioSource uiSFX;
+    public AudioSource pickupSFX;
 
     // Music source
     public AudioSource musicSFX;
 
     // Reference to SeaSFXTrigger 
     private SeaSFXTrigger seaSFXTrigger;
+    public static SettingsMenu Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Start()
     {
+        // PlayerPrefs.DeleteAll();
+        // PlayerPrefs.Save();
         seaSFXTrigger = FindObjectOfType<SeaSFXTrigger>();
         //save main volume and music volume separately to fix saving issues
         if (!PlayerPrefs.HasKey("mainVolume"))
@@ -32,8 +50,8 @@ public class SettingsMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("musicVolume"))
         {
-            musicVolumeSlider.value = 1f;
-            PlayerPrefs.SetFloat("musicVolume", 1f);
+            musicVolumeSlider.value = .5f;
+            PlayerPrefs.SetFloat("musicVolume", .5f);
             SaveMusicSettings();
         }
         LoadSettings();
@@ -51,6 +69,8 @@ public class SettingsMenu : MonoBehaviour
         waterfallSFX.volume = mainVolumeSlider.value;
         fireSFX.volume = mainVolumeSlider.value;
         walkSFX.volume = mainVolumeSlider.value;
+        uiSFX.volume = mainVolumeSlider.value;
+        pickupSFX.volume = mainVolumeSlider.value;
         SaveSettings();
         CustomSoundRange();
     }
@@ -79,18 +99,19 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetFloat("musicVolume", musicVolumeSlider.value);
         PlayerPrefs.Save();
     }
-
     private void CustomSoundRange()
     {
         if (seaSFXTrigger != null)
         {
-            seaSFXTrigger.playerSetVolume = mainVolumeSlider.value - .2f;
+            seaSFXTrigger.playerSetVolume = mainVolumeSlider.value - .4f;
             seaSFXTrigger.setVolume();
         }
         forestSFX.volume = mainVolumeSlider.value;
         waterfallSFX.volume = mainVolumeSlider.value;
         fireSFX.volume = mainVolumeSlider.value;
         walkSFX.volume = mainVolumeSlider.value - .2f;
+        pickupSFX.volume = mainVolumeSlider.value;
+        uiSFX.volume = mainVolumeSlider.value;
         musicSFX.volume = Mathf.Clamp(musicVolumeSlider.value * .25f, 0f, 1f);
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 471532924949130820}
   - component: {fileID: 7468852070628183542}
   - component: {fileID: 4468760782899889329}
-  - component: {fileID: 364376532184913410}
+  - component: {fileID: -3563519319594889069}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a78974cf0f726449810621e48ed5fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!82 &364376532184913410
+--- !u!82 &-3563519319594889069
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,7 +128,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8a3c12d597d412c43873deca4ea35278, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
