@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    [SerializeField] GameObject optionsPanel; // Drag your UI Image (Panel) here
+    [SerializeField] GameObject optionsPanel;
     [SerializeField] GameObject settingsPanel;
 
     [SerializeField] GameObject optionsButton;
@@ -19,7 +19,7 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
         if (optionsPanel != null)
-            optionsPanel.SetActive(false); // Ensure menu starts hidden
+            optionsPanel.SetActive(false);
         if (settingsPanel != null)
             settingsPanel.SetActive(false);
     }

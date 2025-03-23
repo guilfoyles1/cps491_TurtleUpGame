@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class startScene : MonoBehaviour
+public class LoadingScene : MonoBehaviour
 {
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider loadingSlider;
@@ -40,5 +40,15 @@ public class startScene : MonoBehaviour
 
         yield return new WaitForSeconds(.5f);
         asyncOp.allowSceneActivation = true;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

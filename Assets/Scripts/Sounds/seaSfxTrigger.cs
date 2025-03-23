@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SeaSFXTrigger : MonoBehaviour
 {
-    [SerializeField] AudioSource seaAudioSource; // Assign in Inspector
+    [SerializeField] AudioSource seaAudioSource;
     [SerializeField] float fadeSpeed = .25f; // Speed at which volume changes
-    private float targetVolume = 0f; // Desired volume level
+    private float targetVolume = 0f;
 
     public float playerSetVolume;
 

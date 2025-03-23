@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class BackgroundMusicManager : MonoBehaviour
 {
-    [SerializeField] AudioSource musicSource; // Assign in Inspector
-    [SerializeField] AudioClip[] musicTracks; // Assign multiple tracks or just one
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioClip[] musicTracks;
 
     private int currentTrackIndex = 0;
 

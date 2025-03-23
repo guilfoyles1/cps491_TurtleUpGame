@@ -33,7 +33,7 @@ public class SettingsMenu : MonoBehaviour
 
         Instance = this;
 
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     void Start()
@@ -41,7 +41,7 @@ public class SettingsMenu : MonoBehaviour
         // PlayerPrefs.DeleteAll();
         // PlayerPrefs.Save();
         seaSFXTrigger = FindObjectOfType<SeaSFXTrigger>();
-        //save main volume and music volume separately to fix saving issues
+        // Save main volume and music volume separately to fix saving issues
         if (!PlayerPrefs.HasKey("mainVolume"))
         {
             mainVolumeSlider.value = 1f;
@@ -111,7 +111,7 @@ public class SettingsMenu : MonoBehaviour
         fireSFX.volume = mainVolumeSlider.value;
         walkSFX.volume = mainVolumeSlider.value - .2f;
         pickupSFX.volume = mainVolumeSlider.value;
-        uiSFX.volume = mainVolumeSlider.value;
+        uiSFX.volume = mainVolumeSlider.value - .4f;
         musicSFX.volume = Mathf.Clamp(musicVolumeSlider.value * .25f, 0f, 1f);
     }
 }

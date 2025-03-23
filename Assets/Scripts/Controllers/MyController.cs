@@ -9,7 +9,7 @@ public class myController : MonoBehaviour
     private Vector2 movement;
     private Vector2 lastMoveDirection = Vector2.down;
 
-    [SerializeField] GroundChecker groundChecker; // Reference to GroundChecker
+    [SerializeField] GroundChecker groundChecker;
 
     void Awake()
     {
