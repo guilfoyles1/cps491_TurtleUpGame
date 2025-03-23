@@ -4,16 +4,16 @@ using System.Collections;
 
 public class GroundChecker : MonoBehaviour
 {
-    public GameObject player;
-    public AudioSource walkSrc;   // For step sounds
-    public AudioClip grassWalkSFX;
-    public AudioClip sandWalkSFX;
-    public AudioClip woodWalkSFX;
+    [SerializeField] GameObject player;
+    [SerializeField] AudioSource walkSrc;   // For step sounds
+    [SerializeField] AudioClip grassWalkSFX;
+    [SerializeField] AudioClip sandWalkSFX;
+    [SerializeField] AudioClip woodWalkSFX;
 
-    public AudioClip natureSFX; // For Grass
-    public AudioClip seaSFX;    // For Sand
+    [SerializeField] AudioClip natureSFX; // For Grass
+    [SerializeField] AudioClip seaSFX;    // For Sand
 
-    public Tilemap[] tilemaps; // Assign all ground Tilemaps in the Inspector
+    [SerializeField] Tilemap[] tilemaps; // Assign all ground Tilemaps in the Inspector
     private string currentGroundTag = "Default"; // Default ground type
 
     void Update()
