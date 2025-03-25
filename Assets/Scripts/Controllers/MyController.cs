@@ -2,17 +2,26 @@ using UnityEngine;
 
 public class myController : MonoBehaviour
 {
-    // Original serialized fields (only runSpeed value changed)
+    [Header("Movement Settings")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float runSpeed = 7f;
+    [SerializeField] float acceleration = 12f; // Added for smooth transitions
+    [SerializeField] float deceleration = 15f;
+    
+    [Header("Click-to-Move Settings")]
+    [SerializeField] bool allowRunOnClick = true;
+    [SerializeField] float clickRunStopDistance = 0.2f;
+    
     private Rigidbody2D rb;
     private Animator animator;
-    private Vector2 movement;
+    private Vector2 targetVelocity;
+    private Vector2 currentVelocity;
     private Vector2 lastMoveDirection = Vector2.down;
     [SerializeField] GroundChecker groundChecker;
-
-    // Minimal click-to-move addition
+    
+    // Movement state
     private Vector2? targetPosition = null;
+    private bool isClickRunning = false;
 
     void Awake()
     {
@@ -22,63 +31,82 @@ public class myController : MonoBehaviour
 
     void Update()
     {
-        // Original keyboard input handling
-        HandleOriginalMovementInput();
-        
-        // Minimal click-to-move addition
+        HandleKeyboardInput();
+        HandleClickInput();
+        UpdateAnimations();
+    }
+
+    void HandleKeyboardInput()
+    {
+        Vector2 input = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        ).normalized;
+
+        if (input != Vector2.zero)
+        {
+            targetPosition = null; // Cancel click-to-move
+            targetVelocity = input * (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
+        }
+        else if (!targetPosition.HasValue)
+        {
+            targetVelocity = Vector2.zero;
+        }
+    }
+
+    void HandleClickInput()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        }
-        
-        // Original animation handling
-        UpdateOriginalAnimations();
-    }
-
-    void HandleOriginalMovementInput()
-    {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        movement = movement.normalized;
-
-        // Cancel click-to-move if keyboard is used
-        if (movement != Vector2.zero)
-        {
-            targetPosition = null;
+            
+            // Double-click to run (if enabled)
+            if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
+            {
+                isClickRunning = !isClickRunning;
+            }
+            lastClickTime = Time.time;
         }
     }
+    private float lastClickTime;
 
     void FixedUpdate()
     {
-        // Click-to-move integration
         if (targetPosition.HasValue)
         {
             Vector2 direction = (targetPosition.Value - (Vector2)transform.position);
-            if (direction.magnitude > 0.1f)
+            float distance = direction.magnitude;
+            
+            if (distance > clickRunStopDistance)
             {
-                movement = direction.normalized;
-                lastMoveDirection = movement;
+                float speed = isClickRunning ? runSpeed : walkSpeed;
+                targetVelocity = direction.normalized * speed;
             }
             else
             {
-                movement = Vector2.zero;
+                targetVelocity = Vector2.zero;
                 targetPosition = null;
             }
         }
 
-        // Original movement code (only runSpeed value changed)
-        float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
-        rb.velocity = movement * speed;
+        // Smooth movement
+        currentVelocity = Vector2.Lerp(
+            currentVelocity,
+            targetVelocity,
+            (targetVelocity.magnitude > 0.1f ? acceleration : deceleration) * Time.fixedDeltaTime
+        );
+        
+        rb.velocity = currentVelocity;
     }
 
-    // Original animation code kept completely intact
-    void UpdateOriginalAnimations()
+    void UpdateAnimations()
     {
-        bool isRunning = Input.GetKey(KeyCode.LeftShift) && movement != Vector2.zero;
+        bool isMoving = currentVelocity.magnitude > 0.1f;
+        bool isRunning = (Input.GetKey(KeyCode.LeftShift) || isClickRunning) && isMoving;
 
-        if (movement != Vector2.zero)
+        if (isMoving)
         {
-            lastMoveDirection = movement;
+            lastMoveDirection = currentVelocity.normalized;
             groundChecker.PlayWalkSound();
         }
         else
@@ -87,8 +115,8 @@ public class myController : MonoBehaviour
         }
 
         animator.SetBool("isRunning", isRunning);
-        animator.SetBool("isWalking", movement != Vector2.zero && !isRunning);
-        animator.SetBool("isIdle", movement == Vector2.zero);
+        animator.SetBool("isWalking", isMoving && !isRunning);
+        animator.SetBool("isIdle", !isMoving);
         animator.SetFloat("moveX", lastMoveDirection.x);
         animator.SetFloat("moveY", lastMoveDirection.y);
     }
