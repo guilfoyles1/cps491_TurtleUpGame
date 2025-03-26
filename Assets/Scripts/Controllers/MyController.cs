@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class myController : MonoBehaviour
 {
@@ -54,20 +55,27 @@ public class myController : MonoBehaviour
         }
     }
 
-    void HandleClickInput()
+void HandleClickInput()
+{
+    // Prevent click-to-move when clicking on UI
+    if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            
-            // Double-click to run (if enabled)
-            if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
-            {
-                isClickRunning = !isClickRunning;
-            }
-            lastClickTime = Time.time;
-        }
+        return;
     }
+
+    if (Input.GetMouseButtonDown(0))
+    {
+        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Double-click to run (if enabled)
+        if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
+        {
+            isClickRunning = !isClickRunning;
+        }
+
+        lastClickTime = Time.time;
+    }
+}
     private float lastClickTime;
 
     void FixedUpdate()
