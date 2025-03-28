@@ -1330,7 +1330,7 @@ MonoBehaviour:
   spawnDistance: 5
   spawnRate: 3
   numObjectsPerSpawn: 3
-  spawnAreaSize: {x: 10, y: 10}
+  spawnAreaSize: {x: 14, y: 14}
 --- !u!4 &431907401
 Transform:
   m_ObjectHideFlags: 0
@@ -2558,7 +2558,7 @@ MonoBehaviour:
   spawnDistance: 5
   spawnRate: 3
   numObjectsPerSpawn: 3
-  spawnAreaSize: {x: 10, y: 10}
+  spawnAreaSize: {x: 14, y: 14}
 --- !u!4 &1061233294
 Transform:
   m_ObjectHideFlags: 0
