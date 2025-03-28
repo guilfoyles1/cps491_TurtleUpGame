@@ -8,7 +8,10 @@ public class SquareController : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     public GameObject popupUI; // Reference to the popup UI
-    public string targetTag = "TargetObject"; // Tag of the object you want to collide with
+    public GameObject[] hearts = new GameObject[5]; // Hearts
+    public string targetTag = "TargetObject";
+    public string targetTag2 = "TargetObject2";
+    private int health = 5;
 
     void Start()
     {
@@ -63,7 +66,25 @@ public class SquareController : MonoBehaviour
         // Check if the collided object has the specified tag
         if (collision.gameObject.CompareTag(targetTag))
         {
-            ShowPopup("You collided with the target object!");
+            SpriteRenderer spriteRenderer = hearts[health-1].GetComponent<SpriteRenderer>();
+            spriteRenderer.color = new Color(0.2f, 0.0f, 0.0f);
+            Destroy(collision.gameObject);
+            health = health-1;
+            if (health == 0)
+            {
+                ShowPopup("You collided with the target object!");
+            }
+        }
+        else if (collision.gameObject.CompareTag(targetTag2))
+        {
+            if (health < 5)
+            {
+                health = health + 1;
+                //Debug.Log("Health: " + health);
+                //Debug.Log("Index: " + (health-1));
+                SpriteRenderer spriteRenderer = hearts[health - 1].GetComponent<SpriteRenderer>();
+                spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f);
+            }
             Destroy(collision.gameObject);
         }
     }
