@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Import UI namespace
+using UnityEngine.UI;
 
 public class SquareController : MonoBehaviour
 {
@@ -7,20 +7,24 @@ public class SquareController : MonoBehaviour
     private Vector2 moveInput;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    public GameObject popupUI; // Reference to the popup UI
-    public GameObject[] hearts = new GameObject[5]; // Hearts
+    [SerializeField] private Animator animator;
+    public GameObject popupUI;
+    public GameObject[] hearts = new GameObject[5];
     public string targetTag = "TargetObject";
     public string targetTag2 = "TargetObject2";
     private int health = 5;
+    private int foodEaten = 0;
+    public Sprite heartFull;
+    public Sprite heartEmpty;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         if (popupUI != null)
         {
-            popupUI.SetActive(false); // Hide the popup initially
+            popupUI.SetActive(false);
         }
     }
 
@@ -30,7 +34,6 @@ public class SquareController : MonoBehaviour
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
 
-        // Flip sprite based on movement direction
         if (moveInput.x > 0)
         {
             spriteRenderer.flipX = false; // Facing right
@@ -50,12 +53,17 @@ public class SquareController : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             moveDirection = (mousePosition - (Vector2)transform.position).normalized * moveSpeed;
 
-            // Flip sprite based on mouse position
             spriteRenderer.flipX = mousePosition.x < transform.position.x;
+            animator.SetBool("IsSwimming", true);
         }
         else if (moveInput != Vector2.zero)
         {
             moveDirection = moveInput * moveSpeed;
+            animator.SetBool("IsSwimming", true);
+        }
+        else
+        {
+            animator.SetBool("IsSwimming", false);
         }
 
         rb.velocity = moveDirection;
@@ -63,16 +71,15 @@ public class SquareController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Check if the collided object has the specified tag
         if (collision.gameObject.CompareTag(targetTag))
         {
             SpriteRenderer spriteRenderer = hearts[health-1].GetComponent<SpriteRenderer>();
-            spriteRenderer.color = new Color(0.2f, 0.0f, 0.0f);
+            spriteRenderer.sprite = heartEmpty;
             Destroy(collision.gameObject);
             health = health-1;
             if (health == 0)
             {
-                ShowPopup("You collided with the target object!");
+                ShowPopup("You died!");
             }
         }
         else if (collision.gameObject.CompareTag(targetTag2))
@@ -80,10 +87,11 @@ public class SquareController : MonoBehaviour
             if (health < 5)
             {
                 health = health + 1;
+                foodEaten++;
                 //Debug.Log("Health: " + health);
                 //Debug.Log("Index: " + (health-1));
                 SpriteRenderer spriteRenderer = hearts[health - 1].GetComponent<SpriteRenderer>();
-                spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f);
+                spriteRenderer.sprite = heartFull;
             }
             Destroy(collision.gameObject);
         }
@@ -93,11 +101,10 @@ public class SquareController : MonoBehaviour
     {
         if (popupUI != null)
         {
-            popupUI.SetActive(true); // Show the popup
+            popupUI.SetActive(true);
         }
     }
 
-    // Optionally hide the popup when the player clicks a button
     public void HidePopup()
     {
         if (popupUI != null)

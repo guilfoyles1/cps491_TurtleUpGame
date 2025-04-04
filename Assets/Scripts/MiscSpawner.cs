@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectSpawner : MonoBehaviour
+public class ObjectSpawner2 : MonoBehaviour
 {
     public GameObject objectToSpawn;
     public Transform player;
@@ -8,6 +8,7 @@ public class ObjectSpawner : MonoBehaviour
     public float maxSpawnDistance = 5f;
     public float spawnRate = 3f;
     public int numObjectsPerSpawn = 3;
+    public bool isBubble;
     public Sprite[] possibleSprites;
 
     void Start()
@@ -33,7 +34,10 @@ public class ObjectSpawner : MonoBehaviour
 
             Rigidbody2D rb = spawnedObject.GetComponent<Rigidbody2D>();
             randomDirection = Random.insideUnitCircle.normalized;
-            float randomForce = Random.Range(0.1f, 0.2f);
+            randomDirection.y = Random.Range(0.05f, 0.1f);
+            if (randomDirection.x > 0)
+                spriteRenderer.flipX = true;
+            float randomForce = Random.Range(0.5f, 1.5f);
             rb.velocity = randomDirection * randomForce;
         }
     }
