@@ -15,6 +15,11 @@ TagManager:
   - PlasticBin
   - MetalBin
   - PaperBin
+  - RecycleBin
+  - Glass
+  - Plastic
+  - Paper
+  - Metal
   layers:
   - Default
   - TransparentFX

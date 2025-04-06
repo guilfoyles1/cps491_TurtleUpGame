@@ -75,6 +75,24 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             draggedItem.transform.SetParent(dropSlot.transform);
             draggedItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             dropSlot.currentItem = draggedItem;
+
+            //Check bin tag vs. item tag
+            Transform bin = dropSlot.transform.parent; // assuming slot is a child of the bin
+            if (bin != null)
+            {
+                string binTag = bin.tag;
+                string itemTag = draggedItem.tag;
+
+                // "Glass" + "Bin" == GlassBin
+                if (itemTag + "Bin" == binTag)
+                {
+                    Debug.Log("Correct");
+                }
+                else
+                {
+                    Debug.Log("Incorrect");
+                }
+            }
         }
         else
         {
