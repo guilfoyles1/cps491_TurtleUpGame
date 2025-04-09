@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using UnityEngine;
 
 public class BackgroundMusicManager : MonoBehaviour
@@ -26,3 +27,33 @@ public class BackgroundMusicManager : MonoBehaviour
         Invoke("PlayNextTrack", musicSource.clip.length);
     }
 }
+=======
+using UnityEngine;
+
+public class BackgroundMusicManager : MonoBehaviour
+{
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioClip[] musicTracks;
+
+    private int currentTrackIndex = 0;
+
+    void Start()
+    {
+        if (musicTracks.Length > 0 && musicSource != null)
+        {
+            musicSource.loop = false; // Disable looping for individual tracks
+            musicSource.clip = musicTracks[currentTrackIndex];
+            musicSource.Play();
+            Invoke("PlayNextTrack", musicSource.clip.length);
+        }
+    }
+
+    void PlayNextTrack()
+    {
+        currentTrackIndex = (currentTrackIndex + 1) % musicTracks.Length;
+        musicSource.clip = musicTracks[currentTrackIndex];
+        musicSource.Play();
+        Invoke("PlayNextTrack", musicSource.clip.length);
+    }
+}
+>>>>>>> 170d36684f19b92e12997d1a1e72fd5da00dcd84

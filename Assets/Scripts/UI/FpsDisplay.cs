@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using TMPro;
 using UnityEngine;
 
@@ -24,3 +25,31 @@ public class FpsDisplay : MonoBehaviour
         }
     }
 }
+=======
+using TMPro;
+using UnityEngine;
+
+public class FpsDisplay : MonoBehaviour
+{
+    [SerializeField] TextMeshProUGUI fpsText;
+
+    private float timer;
+    private int frameCount;
+
+    void Update()
+    {
+        frameCount++;
+        timer += Time.unscaledDeltaTime;
+
+        if (timer >= 1f)
+        {
+            int fps = Mathf.RoundToInt(frameCount / timer);
+            fpsText.text = "FPS: " + fps;
+
+            // Reset for the next interval
+            timer = 0f;
+            frameCount = 0;
+        }
+    }
+}
+>>>>>>> 170d36684f19b92e12997d1a1e72fd5da00dcd84
