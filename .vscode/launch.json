@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "version": "0.2.0",
     "configurations": [
@@ -7,4 +8,15 @@
             "request": "attach"
         }
      ]
+=======
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Attach to Unity",
+            "type": "vstuc",
+            "request": "attach"
+        }
+     ]
+>>>>>>> 170d36684f19b92e12997d1a1e72fd5da00dcd84
 }
