@@ -7,6 +7,8 @@ public class LoadingScene : MonoBehaviour
 {
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider loadingSlider;
+    [SerializeField] GameObject creditsPanel; // <-- NEW
+
     private AsyncOperation asyncOp;
     private float loadDuration = 1f;
     private float progress = 0f;
@@ -21,7 +23,7 @@ public class LoadingScene : MonoBehaviour
     IEnumerator LoadSceneWithDelay(int sceneIndex)
     {
         asyncOp = SceneManager.LoadSceneAsync(sceneIndex);
-        asyncOp.allowSceneActivation = false; // Prevent instant scene activation
+        asyncOp.allowSceneActivation = false;
 
         float elapsedTime = 0f;
 
@@ -29,8 +31,7 @@ public class LoadingScene : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
 
-            // Increment the progress over time
-            float targetProgress = Mathf.Clamp01(asyncOp.progress / 0.9f); // Normalize progress
+            float targetProgress = Mathf.Clamp01(asyncOp.progress / 0.9f);
             progress += Time.deltaTime / loadDuration;
 
             loadingSlider.value = Mathf.Min(progress, targetProgress);
@@ -50,5 +51,19 @@ public class LoadingScene : MonoBehaviour
 #else
         Application.Quit();
 #endif
+    }
+
+    // ----- NEW STUFF -----
+
+    public void ShowCredits()
+    {
+        if (creditsPanel != null)
+            creditsPanel.SetActive(true);
+    }
+
+    public void HideCredits()
+    {
+        if (creditsPanel != null)
+            creditsPanel.SetActive(false);
     }
 }
