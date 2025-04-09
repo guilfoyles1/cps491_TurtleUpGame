@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Undefined
+  - Trash
+  - TrashBin
+  - Grass
+  - Wood
+  - Sand
+  - Item
+  - GlassBin
+  - PlasticBin
+  - MetalBin
+  - PaperBin
+  - RecycleBin
+  - Glass
+  - Plastic
+  - Paper
+  - Metal
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - player
+  - foreground
+  - background
+  - icon
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 296217927
+    locked: 0
+  - name: player
+    uniqueID: 3751116121
+    locked: 0
+  - name: foreground
+    uniqueID: 2918557149
+    locked: 0
