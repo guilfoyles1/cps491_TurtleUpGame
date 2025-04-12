@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +10,25 @@ public class SquareController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [SerializeField] private Animator animator;
     public GameObject popupUI;
+    public GameObject popupUIText;
+    private TextMeshProUGUI _popupUIText;
     public GameObject[] hearts = new GameObject[5];
     public string targetTag = "TargetObject";
     public string targetTag2 = "TargetObject2";
+    public string targetTag3 = "TargetObject3";
     private int health = 5;
     private int foodEaten = 0;
     public Sprite heartFull;
     public Sprite heartEmpty;
+    public GameObject foodSpawner;
+    public GameObject garbageSpawner;
+    public Scrollbar progressBar;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _popupUIText = popupUIText.GetComponent<TextMeshProUGUI>();
 
         if (popupUI != null)
         {
@@ -77,6 +85,8 @@ public class SquareController : MonoBehaviour
             spriteRenderer.sprite = heartEmpty;
             Destroy(collision.gameObject);
             health = health-1;
+            ObjectSpawner spawner = garbageSpawner.GetComponent<ObjectSpawner>();
+            spawner.numSpawned -= 1;
             if (health == 0)
             {
                 ShowPopup("You died!");
@@ -87,20 +97,39 @@ public class SquareController : MonoBehaviour
             if (health < 5)
             {
                 health = health + 1;
-                foodEaten++;
                 //Debug.Log("Health: " + health);
                 //Debug.Log("Index: " + (health-1));
                 SpriteRenderer spriteRenderer = hearts[health - 1].GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = heartFull;
             }
+            foodEaten++;
+            ObjectSpawner spawner = foodSpawner.GetComponent<ObjectSpawner>();
+            spawner.numSpawned -= 1;
+            Destroy(collision.gameObject);
+            progressBar.size += 0.33f;
+            if (foodEaten > 3)
+            {
+                ShowPopup("You won!");
+            }
+        }
+        else if (collision.gameObject.CompareTag(targetTag3))
+        {
+            moveSpeed = 2f;
+            Invoke(nameof(resetSpeed), 10f);
             Destroy(collision.gameObject);
         }
+    }
+
+    private void resetSpeed()
+    {
+        moveSpeed = 4f;
     }
 
     void ShowPopup(string message)
     {
         if (popupUI != null)
         {
+            _popupUIText.text = message;
             popupUI.SetActive(true);
         }
     }

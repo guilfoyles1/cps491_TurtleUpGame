@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GarbageObject
   - FoodObject
+  - NetObject
   layers:
   - Default
   - TransparentFX
