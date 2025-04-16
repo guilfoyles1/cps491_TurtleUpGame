@@ -10,6 +10,20 @@ public class GameScore : MonoBehaviour
     private Material mat;
     private Color defaultOutlineColor;
 
+
+    //speed bonus
+    private float lastCorrectTime = -10f;
+    public float bonusWindow = .5f; // Time allowed between correct drops for a bonus
+    public int speedBonus = 200;
+
+
+    //streak multiplier
+    private int streakCount = 0;
+    public float streakWindow = 1f; // Time allowed between actions to continue streak
+    public int baseScore = 1000;
+    public float maxMultiplier = 1.6f;
+
+
     void Start()
     {
         UpdateScoreUI();
@@ -17,12 +31,37 @@ public class GameScore : MonoBehaviour
         defaultOutlineColor = mat.GetColor(ShaderUtilities.ID_OutlineColor);
     }
 
-    public void AddScore(int amount)
+    public void AddStreakedScore(bool checkSpeedBonus = false)
     {
-        score += amount;
+        float currentTime = Time.time;
+
+        streakCount++;
+
+        float multiplier = GetMultiplier();
+        int baseAward = Mathf.RoundToInt(baseScore * multiplier);
+        int totalScore = baseAward;
+
+        // Handle speed bonus
+        if (checkSpeedBonus && (currentTime - lastCorrectTime <= bonusWindow))
+        {
+            totalScore += speedBonus;
+            Debug.Log("Speed Bonus! + " + speedBonus);
+            FlashOutline(Color.cyan);
+        }
+        else
+        {
+            FlashOutline(Color.green);
+        }
+
+        score += totalScore;
+        Debug.Log($"Streak x{streakCount} | Multiplier: x{multiplier:F1} | +{totalScore} points");
+
+        lastCorrectTime = currentTime;
+
         UpdateScoreUI();
-        FlashOutline(Color.green);
     }
+
+
 
     public void SubtractScore(int amount)
     {
@@ -39,6 +78,19 @@ public class GameScore : MonoBehaviour
             scoreText.text = score.ToString();
         }
     }
+
+    private float GetMultiplier()
+    {
+        return Mathf.Min(1f + (streakCount - 1) * 0.2f, maxMultiplier);
+    }
+
+    public void ResetStreak()
+    {
+        streakCount = 0;
+        Debug.Log("Streak broken.");
+    }
+
+
 
     public void FlashOutline(Color flashColor)
     {

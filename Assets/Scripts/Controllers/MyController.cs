@@ -6,23 +6,20 @@ public class myController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] float walkSpeed = 4f;
     [SerializeField] float runSpeed = 7f;
-    [SerializeField] float acceleration = 12f; // Added for smooth transitions
-    [SerializeField] float deceleration = 15f;
-    
+
     [Header("Click-to-Move Settings")]
     [SerializeField] bool allowRunOnClick = true;
     [SerializeField] float clickRunStopDistance = 0.2f;
-    
+
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 targetVelocity;
-    private Vector2 currentVelocity;
     private Vector2 lastMoveDirection = Vector2.down;
     [SerializeField] GroundChecker groundChecker;
-    
-    // Movement state
+
     private Vector2? targetPosition = null;
     private bool isClickRunning = false;
+    private float lastClickTime;
 
     void Awake()
     {
@@ -55,28 +52,46 @@ public class myController : MonoBehaviour
         }
     }
 
-void HandleClickInput()
-{
-    // Prevent click-to-move when clicking on UI
-    if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+    void HandleClickInput()
     {
-        return;
-    }
-
-    if (Input.GetMouseButtonDown(0))
+#if UNITY_ANDROID || UNITY_IOS
+    if (Input.touchCount > 0)
     {
-        targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        // Double-click to run (if enabled)
-        if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
+        Touch touch = Input.GetTouch(0);
+        if (touch.phase == TouchPhase.Began)
         {
-            isClickRunning = !isClickRunning;
-        }
+            if (IsTouchOverUI(touch.position))
+                return;
 
-        lastClickTime = Time.time;
+            targetPosition = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
+            {
+                isClickRunning = !isClickRunning;
+            }
+
+            lastClickTime = Time.time;
+        }
     }
-}
-    private float lastClickTime;
+#else
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsTouchOverUI(Input.mousePosition))
+                return;
+
+            targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
+            {
+                isClickRunning = !isClickRunning;
+            }
+
+            lastClickTime = Time.time;
+        }
+#endif
+    }
+
+
 
     void FixedUpdate()
     {
@@ -84,7 +99,7 @@ void HandleClickInput()
         {
             Vector2 direction = (targetPosition.Value - (Vector2)transform.position);
             float distance = direction.magnitude;
-            
+
             if (distance > clickRunStopDistance)
             {
                 float speed = isClickRunning ? runSpeed : walkSpeed;
@@ -97,24 +112,18 @@ void HandleClickInput()
             }
         }
 
-        // Smooth movement
-        currentVelocity = Vector2.Lerp(
-            currentVelocity,
-            targetVelocity,
-            (targetVelocity.magnitude > 0.1f ? acceleration : deceleration) * Time.fixedDeltaTime
-        );
-        
-        rb.velocity = currentVelocity;
+        rb.velocity = targetVelocity;
     }
 
     void UpdateAnimations()
     {
-        bool isMoving = currentVelocity.magnitude > 0.1f;
+        Vector2 velocity = rb.velocity;
+        bool isMoving = velocity.magnitude > 0.1f;
         bool isRunning = (Input.GetKey(KeyCode.LeftShift) || isClickRunning) && isMoving;
 
         if (isMoving)
         {
-            lastMoveDirection = currentVelocity.normalized;
+            lastMoveDirection = velocity.normalized;
             groundChecker.PlayWalkSound();
         }
         else
@@ -128,4 +137,16 @@ void HandleClickInput()
         animator.SetFloat("moveX", lastMoveDirection.x);
         animator.SetFloat("moveY", lastMoveDirection.y);
     }
+
+    private bool IsTouchOverUI(Vector2 screenPos)
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = screenPos;
+
+        var results = new System.Collections.Generic.List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        return results.Count > 0;
+    }
+
 }

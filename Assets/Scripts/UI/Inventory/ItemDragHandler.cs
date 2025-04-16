@@ -91,10 +91,10 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 if (itemTag + "Bin" == binTag)
                 {
                     Debug.Log("Correct");
-                    gameScore.AddScore(1000);
+                    gameScore.AddStreakedScore(true);
+
 
                     GameObject actualBin = GameObject.Find(binTag.ToLower()); // e.g., "glassbin"
-                    Debug.Log(actualBin);
 
                     if (actualBin != null)
                     {
@@ -120,6 +120,8 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 {
                     Debug.Log("Incorrect");
                     gameScore.SubtractScore(500);
+                    gameScore.ResetStreak();
+
 
                     GameObject actualBin = GameObject.Find(binTag.ToLower()); // e.g., "glassbin"
 
