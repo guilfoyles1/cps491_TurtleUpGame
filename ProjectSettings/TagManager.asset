@@ -20,6 +20,9 @@ TagManager:
   - Plastic
   - Paper
   - Metal
+  - FoodObject
+  - GarbageObject
+  - NetObject
   layers:
   - Default
   - TransparentFX
@@ -60,9 +63,15 @@ TagManager:
   - name: background
     uniqueID: 296217927
     locked: 0
+  - name: backgroundItem
+    uniqueID: 524293341
+    locked: 0
   - name: player
     uniqueID: 3751116121
     locked: 0
   - name: foreground
     uniqueID: 2918557149
+    locked: 0
+  - name: ui
+    uniqueID: 485635695
     locked: 0
