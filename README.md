@@ -132,7 +132,7 @@ We are currently exploring how to make the game accessible through the [Turtle U
 
 ### Current Hosting Options:
 - **GitHub Pages (WebGL Build):**  
-  [https://spearsz2.github.io/CPS491Group14self/](https://spearsz2.github.io/CPS491Group14self/)  
+https://guilfoyles1.github.io/cps491group14_homepage/
 
 - **Turtle Up Website (iframe):**  
   Discussed and tested with Turtle Up’s IT contact. Iframe offers better safety, but testing is ongoing to ensure mobile usability.
