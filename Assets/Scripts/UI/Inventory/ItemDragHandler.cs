@@ -10,10 +10,13 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private GameObject draggedItem;
     private AudioSource inventorySFX;
 
+    private GameScore gameScore;
+
     void Start()
     {
         inventorySFX = GetComponent<AudioSource>();
         canvasGroup = GetComponent<CanvasGroup>();
+        gameScore = GameObject.Find("GameController").GetComponent<GameScore>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -78,7 +81,8 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
             //Check bin tag vs. item tag
             Transform bin = dropSlot.transform.parent; // assuming slot is a child of the bin
-            if (bin != null)
+
+            if (bin != null && bin.tag.EndsWith("Bin"))
             {
                 string binTag = bin.tag;
                 string itemTag = draggedItem.tag;
@@ -87,11 +91,58 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
                 if (itemTag + "Bin" == binTag)
                 {
                     Debug.Log("Correct");
+                    gameScore.AddScore(1000);
+
+                    GameObject actualBin = GameObject.Find(binTag.ToLower()); // e.g., "glassbin"
+                    Debug.Log(actualBin);
+
+                    if (actualBin != null)
+                    {
+                        Transform icon = actualBin.transform.Find("CorrectIcon");
+                        if (icon != null)
+                        {
+                            FloatUpAndFadeOnce anim = icon.GetComponent<FloatUpAndFadeOnce>();
+
+                            if (!icon.gameObject.activeSelf)
+                            {
+                                icon.gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                anim.Restart();
+                            }
+                        }
+                    }
+                    Destroy(draggedItem, 0.5f);
+
                 }
                 else
                 {
                     Debug.Log("Incorrect");
+                    gameScore.SubtractScore(500);
+
+                    GameObject actualBin = GameObject.Find(binTag.ToLower()); // e.g., "glassbin"
+
+                    if (actualBin != null)
+                    {
+                        Transform icon = actualBin.transform.Find("IncorrectIcon");
+                        if (icon != null)
+                        {
+                            FloatUpAndFadeOnce anim = icon.GetComponent<FloatUpAndFadeOnce>();
+
+                            if (!icon.gameObject.activeSelf)
+                            {
+                                icon.gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                anim.Restart();
+                            }
+                        }
+                    }
+
                 }
+
             }
         }
         else
@@ -104,7 +155,6 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         draggedItem = null;
     }
-
 
 
 }
