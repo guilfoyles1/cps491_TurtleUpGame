@@ -9,19 +9,20 @@
 
 ### Two Gameplay Perspectives:
 - **Human (Level 1):** Collect and sort trash, navigate obstacles, and help maintain a clean beach environment. Properly dispose of items using a drag-and-drop inventory system and color-coded bins.
-- **Turtle (Level 2):** Scavenge for food while avoiding plastic waste, illustrating the challenges sea turtles face in polluted waters.
+- **Turtle (Level 2):** Scavenge for food while avoiding plastic waste and fishing nets, illustrating the challenges sea turtles face in polluted waters. Developed by Team 1 using an underwater-themed asset pack and unique swimming mechanics.
 
 ### Character Customization:
 Players can select from five native turtle species and a variety of human avatars, reflecting the biodiversity of Ghana and allowing for representation and player choice.
 
 ### Inventory System:
-Tracks collected trash and allows for proper disposal at designated bins. Improper sorting will eventually trigger feedback to help guide player learning *(in progress)*.
+Tracks collected trash and allows for proper disposal at designated bins. Improper sorting triggers visual/audio feedback and affects scoring.
 
 ### Educational Integration:
 Pop-up learning moments and visuals demonstrate conservation best practices. A tutorial sequence introduces objectives and controls for new players.
 
 ### Mobile Compatibility:
-Click-to-move functionality ensures a smooth experience on touchscreen devices. WASD and double-click-to-run are also supported for desktop play.
+Click-to-move functionality ensures a smooth experience on touchscreen devices. WASD and double-click-to-run are also supported for desktop play.  
+In Level 2, a **hold-to-move** mechanic was used to better reflect the turtle's swimming behavior.
 
 ### Immersive Design Elements:
 Includes a day-night cycle, animated objects (fire pit, windmill, flowing stream), sound effects, and a mini-map to enhance gameplay and player engagement.
@@ -50,7 +51,7 @@ The game is divided into two levels, each offering a unique perspective and lear
 **Controls:**
 - **WASD / Arrow Keys** – Swim  
 - **Shift (Hold)** – Swim faster  
-- **Mouse Click / Tap** – Swim to selected spot (single-click) or swim quickly (double-click)  
+- **Mouse Hold / Tap & Hold** – Swim toward held direction or location  
 - **Settings Button** – Pause the game and access volume/menu options  
 
 ---
@@ -103,27 +104,25 @@ Please create an issue on the repository with:
 ## 📈 Current Development Progress
 
 ### Implemented:
-- Player movement (WASD, arrow keys, click-to-move, double-click-to-run)  
-- Trash collection and inventory tracking  
+- Player movement (WASD, arrow keys, click-to-move, hold-to-move for swimming)  
+- Trash collection, inventory tracking and scoring logic
 - Minimap, camera follow system, pause/settings menu  
 - Day-night cycle and animated environmental elements  
 - Updated main menu with new visuals, logo, and parallax design  
 - Trash bin logic with item tagging and sorting response  
 - Slot icon feedback for correct/incorrect sorting  
-- Initial deployment to GitHub Pages (WebGL)
+- Initial deployment to GitHub Pages (WebGL)  
+- Merged Level 1 (Team 2) and Level 2 (Team 1) into one Unity project
 
 ### In Progress:
 - UI polish and visual feedback improvements  
-- Timer mechanic and simplified scoring logic  
-- Cross-team scene integration for Level 1 and Level 2  
-- Tutorial menu and pop-up overlays  
-- Character customization refinement
+- Scene transition script for level switching  
+- Final pass on tutorial menu, overlays, and accessibility elements  
+- Finalizing all documentation and crediting for handoff
 
 ### Upcoming:
-- Final trash sorting logic and educational overlays  
-- Client review and testing  
-- Public deployment *(via GitHub Pages and/or iframe on TurtleUp.org)*  
-- Finalizing documentation for Capstone handoff  
+- Public deployment *(via GitHub Pages and/or iframe on TurtleUp.org)*
+- Final presentation  
 
 ---
 
@@ -133,21 +132,15 @@ We are currently exploring how to make the game accessible through the [Turtle U
 
 ### Current Hosting Options:
 - **GitHub Pages (WebGL Build):**  
-  You can view the current WebGL build here:  
   [https://spearsz2.github.io/CPS491Group14self/](https://spearsz2.github.io/CPS491Group14self/)  
-  This uses Unity’s built-in WebGL exporter and is hosted via GitHub Pages.
 
 - **Turtle Up Website (iframe):**  
-  We are in contact with the Turtle Up IT department (Mike) to assess the feasibility of embedding the game via iframe on the organization’s site.  
-  - **Pros:** Safer and easier to maintain  
-  - **Cons:** May cause issues with mobile compatibility  
-  Further testing and collaboration is ongoing.
+  Discussed and tested with Turtle Up’s IT contact. Iframe offers better safety, but testing is ongoing to ensure mobile usability.
 
 ### Notes for Future Developers:
-- WebGL builds must be placed in a `/Build` folder and linked to an `index.html`.
-- Some Unity features may not work in WebGL (e.g., certain shaders or intensive physics).
-- Use Unity’s compression and resolution settings to optimize for mobile.
-- If not using iframe, take care to sandbox the game to avoid any potential conflicts with the hosting website.
+- Place WebGL output in a `/Build` folder linked to `index.html`.
+- Optimize with Unity’s resolution and compression settings for mobile.
+- Avoid unsupported Unity features in WebGL exports.
 
 ---
 
@@ -157,18 +150,25 @@ We used public asset packs to build and customize visuals for this project. Belo
 
 - [Trash & Junk Asset Pack by BTL Games](https://btl-games.itch.io/trash-and-junk-asset-pack)  
 - [Sunnyside Tileset by Daniel Diggle](https://danieldiggle.itch.io/sunnyside)  
+- [Pixel Kit: Underwater Pack by Noa Calice](https://assetstore.unity.com/packages/2d/environments/pixel-kit-underwater-pack-193051)
 
-Assets were slightly modified for style consistency, optimization, and localization.
+Some assets were modified for style consistency and localization. All licensing and attribution notes have been followed.
 
 ---
 
 ## 👥 Team Members
 
+### Team 2 (Level 1 - Human Perspective)
+- **Shayna I. Guilfoyle** – Team Lead – guilfoyles1@udayton.edu  
 - **Shani D. Patel** – Backend Development – patels44@udayton.edu  
 - **Saif Ullah** – Backend Development – ullahs3@udayton.edu  
-- **Shayna I. Guilfoyle** – Team Lead – guilfoyles1@udayton.edu  
-- **Lazar Jevtic** – Frontend Design/Development – jevticl1@udayton.edu  
 - **Zachary R. Spears** – Backend Development – spearsz2@udayton.edu  
+- **Lazar Jevtic** – Frontend Design/Development – jevticl1@udayton.edu  
+
+### Team 1 (Level 2 - Turtle Perspective)
+- **Grant C. Lloyd** – Team Lead – lloydg1@udayton.edu  
+- **James S. Jarvis** – Backend Development – jarvisj1@udayton.edu  
+- **Kiran J. Khettry** – Backend Development – khettryk1@udayton.edu  
 
 ---
 
