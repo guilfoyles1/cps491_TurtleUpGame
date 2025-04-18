@@ -19,6 +19,10 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("Optional Player Input Scripts to Disable")]
     public List<MonoBehaviour> playerInputScripts; // Add movement scripts here
 
+    [Header("Audio")]
+    public AudioSource clickSound;
+
+
     void Start()
     {
         // Zoom in for character selection
@@ -37,13 +41,22 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         currentIndex = (currentIndex - 1 + characters.Count) % characters.Count;
         UpdateSelection();
+        PlayClickSound();
     }
 
     void NextCharacter()
     {
         currentIndex = (currentIndex + 1) % characters.Count;
         UpdateSelection();
+        PlayClickSound();
     }
+
+    void PlayClickSound()
+    {
+        if (clickSound != null)
+            clickSound.Play();
+    }
+
 
     void UpdateSelection()
     {
