@@ -19,9 +19,23 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("Optional Player Input Scripts to Disable")]
     public List<MonoBehaviour> playerInputScripts; // Add movement scripts here
 
+    [Header("Inventory Panels - order based on characters")]
+    public List<GameObject> inventoryPanels; // Must be same size as characters
+
+
     [Header("Audio")]
     public AudioSource clickSound;
 
+
+    void Awake()
+    {
+        // Disable all InventoryControllers at the beginning
+        foreach (var character in characters)
+        {
+            InventoryController inv = character.GetComponent<InventoryController>();
+            if (inv != null) inv.enabled = false;
+        }
+    }
 
     void Start()
     {
@@ -89,6 +103,23 @@ public class CharacterSelectionManager : MonoBehaviour
 
         // Enable movement
         DisablePlayerControls(false);
+
+        // Enable the right inventory controller based on character
+        GameObject selectedPlayer = characters[currentIndex];
+        InventoryController inventory = selectedPlayer.GetComponent<InventoryController>();
+        if (inventory != null)
+        {
+            inventory.enabled = true;
+        }
+
+        // Enable the correct inventory panel based on character
+        for (int i = 0; i < inventoryPanels.Count; i++)
+        {
+            if (inventoryPanels[i] != null)
+            {
+                inventoryPanels[i].SetActive(i == currentIndex);
+            }
+        }
     }
 
     void DisablePlayerControls(bool disable)
