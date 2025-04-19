@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using TMPro;
+
 
 public class CharacterSelectionManager : MonoBehaviour
 {
@@ -15,6 +17,18 @@ public class CharacterSelectionManager : MonoBehaviour
     public Button startGameButton;
 
     private int currentIndex = 0;
+
+    [Header("UI")]
+    public TextMeshProUGUI descriptionText; // Or just Text if you're not using TMP
+
+    [TextArea]
+    public List<string> characterDescriptions = new List<string>
+    {
+    "++inventory    -speed",
+    "++speed    -inventory",
+    "+inventory     +speed"
+    };
+
 
     [Header("Optional Player Input Scripts to Disable")]
     public List<MonoBehaviour> playerInputScripts; // Add movement scripts here
@@ -81,7 +95,6 @@ public class CharacterSelectionManager : MonoBehaviour
 
             if (isSelected)
             {
-                // Set animation direction to "face down"
                 Animator anim = characters[i].GetComponent<Animator>();
                 if (anim != null && anim.runtimeAnimatorController != null)
                 {
@@ -91,20 +104,22 @@ public class CharacterSelectionManager : MonoBehaviour
         }
 
         virtualCam.Follow = characters[currentIndex].transform;
+
+        // Update the character description text
+        if (descriptionText != null && currentIndex < characterDescriptions.Count)
+        {
+            descriptionText.text = characterDescriptions[currentIndex];
+        }
     }
+
 
     void StartGame()
     {
-        // Hide selection panel
         characterSelectPanel.SetActive(false);
-
-        // Zoom out for gameplay
         virtualCam.m_Lens.OrthographicSize = 7;
-
-        // Enable movement
         DisablePlayerControls(false);
 
-        // Enable the right inventory controller based on character
+        // Enable InventoryController if needed
         GameObject selectedPlayer = characters[currentIndex];
         InventoryController inventory = selectedPlayer.GetComponent<InventoryController>();
         if (inventory != null)
@@ -112,15 +127,20 @@ public class CharacterSelectionManager : MonoBehaviour
             inventory.enabled = true;
         }
 
-        // Enable the correct inventory panel based on character
+        // Enable matching inventory panel (if using)
         for (int i = 0; i < inventoryPanels.Count; i++)
         {
             if (inventoryPanels[i] != null)
-            {
                 inventoryPanels[i].SetActive(i == currentIndex);
-            }
+        }
+
+        // Disable the description text
+        if (descriptionText != null)
+        {
+            descriptionText.gameObject.SetActive(false);
         }
     }
+
 
     void DisablePlayerControls(bool disable)
     {
