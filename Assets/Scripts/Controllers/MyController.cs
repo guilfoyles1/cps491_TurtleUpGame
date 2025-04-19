@@ -21,6 +21,9 @@ public class myController : MonoBehaviour
     private Vector2? targetPosition = null;
     private bool isClickRunning = false;
     private float lastClickTime;
+    public GameObject clickMarkerPrefab; // Assign in Inspector
+    private GameObject clickMarkerInstance;
+
 
     [Header("Stamina Settings")]
     [SerializeField] float maxStamina = 100f;
@@ -41,6 +44,17 @@ public class myController : MonoBehaviour
         animator = GetComponent<Animator>();
         currentStamina = maxStamina;
     }
+
+    void Start()
+    {
+        // Create the marker once at start
+        if (clickMarkerPrefab != null)
+        {
+            clickMarkerInstance = Instantiate(clickMarkerPrefab);
+            clickMarkerInstance.SetActive(false); // Hide it by default
+        }
+    }
+
 
     void Update()
     {
@@ -90,6 +104,12 @@ public class myController : MonoBehaviour
                 return;
 
             targetPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector3 markerPos = new Vector3(targetPosition.Value.x, targetPosition.Value.y, 0f);
+            if (clickMarkerInstance != null)
+            {
+                clickMarkerInstance.transform.position = markerPos;
+                clickMarkerInstance.SetActive(true);
+            }
 
             if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
             {
@@ -106,6 +126,12 @@ public class myController : MonoBehaviour
                 return;
 
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 markerPos = new Vector3(targetPosition.Value.x, targetPosition.Value.y, 0f);
+            if (clickMarkerInstance != null)
+            {
+                clickMarkerInstance.transform.position = markerPos;
+                clickMarkerInstance.SetActive(true);
+            }
 
             if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
             {
@@ -136,6 +162,11 @@ public class myController : MonoBehaviour
             {
                 targetVelocity = Vector2.zero;
                 targetPosition = null;
+                if (clickMarkerInstance != null)
+                {
+                    clickMarkerInstance.SetActive(false);
+                }
+
             }
         }
 
