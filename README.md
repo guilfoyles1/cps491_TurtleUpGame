@@ -131,11 +131,14 @@ Please create an issue on the repository with:
 We are currently exploring how to make the game accessible through the [Turtle Up website](https://turtleup.org). Our goal is to ensure the game is playable on both desktop and mobile devices while keeping it secure and easy to update.
 
 ### Current Hosting Options:
-- **GitHub Pages (WebGL Build):**  
-https://guilfoyles1.github.io/cps491group14_homepage/
+- **Playable Game (WebGL Build):**  
+  https://guilfoyles1.github.io/cps491_TurtleUpGame/
 
-- **Turtle Up Website (iframe):**  
-  Discussed and tested with Turtle Up’s IT contact. Iframe offers better safety, but testing is ongoing to ensure mobile usability.
+- **Project Homepage:**  
+  https://guilfoyles1.github.io/cps491group14_homepage/
+
+- **Turtle Up Website Deployment:**  
+  Discussed with Turtle Up’s IT team. In progress.
 
 ### Notes for Future Developers:
 - Place WebGL output in a `/Build` folder linked to `index.html`.
