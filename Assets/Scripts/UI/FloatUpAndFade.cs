@@ -4,8 +4,10 @@ public class FloatUpAndFadeOnce : MonoBehaviour
 {
     public float floatDistance = 1f;
     public float duration = 1f;
+    public float spawnRadius = 1.5f; // in pixels (Unity units depend on canvas or world scale)
 
-    private Vector3 startLocalPos;
+    private Vector3 baseLocalPos;
+    private Vector3 offset;
     private SpriteRenderer spriteRenderer;
     private float elapsedTime;
     private bool animating = false;
@@ -13,18 +15,23 @@ public class FloatUpAndFadeOnce : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        startLocalPos = transform.localPosition;
+        baseLocalPos = transform.localPosition;
     }
 
     void OnEnable()
     {
-        Restart(); // Always restart when activated
+        Restart();
     }
 
     public void Restart()
     {
         elapsedTime = 0f;
-        transform.localPosition = startLocalPos;
+
+        // 🎲 Random X/Y offset within radius
+        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
+        offset = new Vector3(randomOffset.x, randomOffset.y, 0);
+
+        transform.localPosition = baseLocalPos + offset;
         SetAlpha(1f);
         animating = true;
     }
@@ -36,7 +43,7 @@ public class FloatUpAndFadeOnce : MonoBehaviour
         elapsedTime += Time.deltaTime;
         float progress = elapsedTime / duration;
 
-        transform.localPosition = startLocalPos + Vector3.up * floatDistance * progress;
+        transform.localPosition = baseLocalPos + offset + Vector3.up * floatDistance * progress;
         SetAlpha(1f - progress);
 
         if (progress >= 1f)
