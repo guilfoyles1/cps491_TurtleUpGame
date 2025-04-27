@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -20,18 +21,47 @@ public class myController : MonoBehaviour
     private Vector2? targetPosition = null;
     private bool isClickRunning = false;
     private float lastClickTime;
+    public GameObject clickMarkerPrefab; // Assign in Inspector
+    private GameObject clickMarkerInstance;
+
+
+    [Header("Stamina Settings")]
+    [SerializeField] float maxStamina = 100f;
+    [SerializeField] float staminaDrainRate = 20f;
+    [SerializeField] float staminaRegenRate = 15f;
+    private bool canSprint = true;
+
+
+    private float currentStamina;
+
+    [Header("Stamina Bar Sprites")]
+    public List<GameObject> staminaBarImages; // Bar0 to Bar7
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        currentStamina = maxStamina;
     }
+
+    void Start()
+    {
+        // Create the marker once at start
+        if (clickMarkerPrefab != null)
+        {
+            clickMarkerInstance = Instantiate(clickMarkerPrefab);
+            clickMarkerInstance.SetActive(false); // Hide it by default
+        }
+    }
+
 
     void Update()
     {
         HandleKeyboardInput();
         HandleClickInput();
         UpdateAnimations();
+        UpdateStamina();
     }
 
     void HandleKeyboardInput()
@@ -44,13 +74,23 @@ public class myController : MonoBehaviour
         if (input != Vector2.zero)
         {
             targetPosition = null; // Cancel click-to-move
-            targetVelocity = input * (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed);
+
+            float speed = walkSpeed;
+
+            if (Input.GetKey(KeyCode.LeftShift) && canSprint)
+            {
+                speed = runSpeed;
+            }
+
+            targetVelocity = input * speed;
         }
+
         else if (!targetPosition.HasValue)
         {
             targetVelocity = Vector2.zero;
         }
     }
+
 
     void HandleClickInput()
     {
@@ -64,6 +104,12 @@ public class myController : MonoBehaviour
                 return;
 
             targetPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            Vector3 markerPos = new Vector3(targetPosition.Value.x, targetPosition.Value.y, 0f);
+            if (clickMarkerInstance != null)
+            {
+                clickMarkerInstance.transform.position = markerPos;
+                clickMarkerInstance.SetActive(true);
+            }
 
             if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
             {
@@ -80,6 +126,12 @@ public class myController : MonoBehaviour
                 return;
 
             targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 markerPos = new Vector3(targetPosition.Value.x, targetPosition.Value.y, 0f);
+            if (clickMarkerInstance != null)
+            {
+                clickMarkerInstance.transform.position = markerPos;
+                clickMarkerInstance.SetActive(true);
+            }
 
             if (allowRunOnClick && Time.time - lastClickTime < 0.3f)
             {
@@ -102,24 +154,32 @@ public class myController : MonoBehaviour
 
             if (distance > clickRunStopDistance)
             {
-                float speed = isClickRunning ? runSpeed : walkSpeed;
+                float speed = (isClickRunning && canSprint) ? runSpeed : walkSpeed;
                 targetVelocity = direction.normalized * speed;
             }
+
             else
             {
                 targetVelocity = Vector2.zero;
                 targetPosition = null;
+                if (clickMarkerInstance != null)
+                {
+                    clickMarkerInstance.SetActive(false);
+                }
+
             }
         }
 
         rb.velocity = targetVelocity;
     }
 
+
     void UpdateAnimations()
     {
         Vector2 velocity = rb.velocity;
         bool isMoving = velocity.magnitude > 0.1f;
-        bool isRunning = (Input.GetKey(KeyCode.LeftShift) || isClickRunning) && isMoving;
+        bool isRunning = (Input.GetKey(KeyCode.LeftShift) || isClickRunning) && canSprint && isMoving;
+
 
         if (isMoving)
         {
@@ -148,5 +208,48 @@ public class myController : MonoBehaviour
 
         return results.Count > 0;
     }
+
+    void UpdateStamina()
+    {
+        bool isTryingToRun = (Input.GetKey(KeyCode.LeftShift) || isClickRunning) && canSprint && targetVelocity.magnitude > 0.1f;
+
+        if (isTryingToRun)
+        {
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+            currentStamina = Mathf.Max(currentStamina, 0f);
+
+            // Once stamina runs out, stop sprinting
+            if (currentStamina <= 0f)
+            {
+                canSprint = false;
+            }
+        }
+        else
+        {
+            currentStamina += staminaRegenRate * Time.deltaTime;
+            currentStamina = Mathf.Min(currentStamina, maxStamina);
+
+            // Re-enable sprinting only when fully recharged
+            if (currentStamina >= maxStamina)
+            {
+                canSprint = true;
+            }
+        }
+
+        UpdateStaminaBarVisual();
+    }
+
+
+
+    void UpdateStaminaBarVisual()
+    {
+        int index = Mathf.RoundToInt((currentStamina / maxStamina) * (staminaBarImages.Count - 1));
+
+        for (int i = 0; i < staminaBarImages.Count; i++)
+        {
+            staminaBarImages[i].SetActive(i == index);
+        }
+    }
+
 
 }
