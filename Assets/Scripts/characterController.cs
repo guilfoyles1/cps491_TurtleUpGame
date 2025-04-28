@@ -23,6 +23,7 @@ public class SquareController : MonoBehaviour
     public GameObject foodSpawner;
     public GameObject garbageSpawner;
     public Scrollbar progressBar;
+    public GameObject sign;
 
     void Start()
     {
@@ -55,6 +56,7 @@ public class SquareController : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 moveDirection = Vector2.zero;
+        SpriteRenderer signRenderer = sign.GetComponent<SpriteRenderer>();
 
         if (Input.GetMouseButton(0))
         {
@@ -63,11 +65,13 @@ public class SquareController : MonoBehaviour
 
             spriteRenderer.flipX = mousePosition.x < transform.position.x;
             animator.SetBool("IsSwimming", true);
+            signRenderer.enabled = false;
         }
         else if (moveInput != Vector2.zero)
         {
             moveDirection = moveInput * moveSpeed;
             animator.SetBool("IsSwimming", true);
+            signRenderer.enabled = false;
         }
         else
         {
@@ -106,8 +110,8 @@ public class SquareController : MonoBehaviour
             ObjectSpawner spawner = foodSpawner.GetComponent<ObjectSpawner>();
             spawner.numSpawned -= 1;
             Destroy(collision.gameObject);
-            progressBar.size += 0.33f;
-            if (foodEaten > 3)
+            progressBar.size += 0.1f;
+            if (foodEaten > 10)
             {
                 ShowPopup("You won!");
             }

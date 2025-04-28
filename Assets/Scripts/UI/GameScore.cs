@@ -1,14 +1,17 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameScore : MonoBehaviour
 {
     public int score = 0;
-    public TextMeshProUGUI scoreText;
-    private Coroutine flashRoutine;
-    private Material mat;
-    private Color defaultOutlineColor;
+    public Slider scoreBar;
+    public int maxScore = 50000;
+
+    //score gain text
+    public TextMeshProUGUI scoreGainText;
+    private Coroutine scoreTextRoutine;
 
 
     //speed bonus
@@ -27,8 +30,6 @@ public class GameScore : MonoBehaviour
     void Start()
     {
         UpdateScoreUI();
-        mat = scoreText.fontMaterial;
-        defaultOutlineColor = mat.GetColor(ShaderUtilities.ID_OutlineColor);
     }
 
     public void AddStreakedScore(bool checkSpeedBonus = false)
@@ -46,17 +47,18 @@ public class GameScore : MonoBehaviour
         {
             totalScore += speedBonus;
             Debug.Log("Speed Bonus! + " + speedBonus);
-            FlashOutline(Color.cyan);
-        }
-        else
-        {
-            FlashOutline(Color.green);
         }
 
         score += totalScore;
         Debug.Log($"Streak x{streakCount} | Multiplier: x{multiplier:F1} | +{totalScore} points");
 
         lastCorrectTime = currentTime;
+
+        // Show floating score gain text
+        if (scoreTextRoutine != null)
+            StopCoroutine(scoreTextRoutine);
+        scoreTextRoutine = StartCoroutine(ShowScoreGain(totalScore));
+
 
         UpdateScoreUI();
     }
@@ -68,16 +70,16 @@ public class GameScore : MonoBehaviour
         score -= amount;
         score = Mathf.Max(score, 0);
         UpdateScoreUI();
-        FlashOutline(Color.red);
     }
 
     private void UpdateScoreUI()
     {
-        if (scoreText != null)
+        if (scoreBar != null)
         {
-            scoreText.text = score.ToString();
+            scoreBar.value = Mathf.Clamp(score, 0, maxScore);
         }
     }
+
 
     private float GetMultiplier()
     {
@@ -90,23 +92,34 @@ public class GameScore : MonoBehaviour
         Debug.Log("Streak broken.");
     }
 
-
-
-    public void FlashOutline(Color flashColor)
+    private IEnumerator ShowScoreGain(int amount)
     {
-        if (flashRoutine != null)
+        scoreGainText.text = $"+{amount}";
+        Color startColor = scoreGainText.color;
+        startColor.a = 1f;
+        scoreGainText.color = startColor;
+
+        Vector3 originalPos = scoreGainText.rectTransform.localPosition;
+
+        float duration = 0.6f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
         {
-            StopCoroutine(flashRoutine);
-            // Immediately reset to default in case coroutine didn't finish
-            mat.SetColor(ShaderUtilities.ID_OutlineColor, defaultOutlineColor);
+            elapsed += Time.deltaTime;
+
+            // Fade out and move up
+            float t = elapsed / duration;
+            scoreGainText.color = new Color(startColor.r, startColor.g, startColor.b, 1f - t);
+            scoreGainText.rectTransform.localPosition = originalPos + new Vector3(0, t * 30f, 0); // float up 30 units
+
+            yield return null;
         }
-        flashRoutine = StartCoroutine(FlashOutlineCoroutine(flashColor));
+
+        // Reset
+        scoreGainText.text = "";
+        scoreGainText.rectTransform.localPosition = originalPos;
     }
 
-    private IEnumerator FlashOutlineCoroutine(Color flashColor)
-    {
-        mat.SetColor(ShaderUtilities.ID_OutlineColor, flashColor);
-        yield return new WaitForSeconds(0.7f);
-        mat.SetColor(ShaderUtilities.ID_OutlineColor, defaultOutlineColor);
-    }
+
 }
