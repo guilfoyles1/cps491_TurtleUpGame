@@ -16,6 +16,7 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] AudioSource walkSFX;
     [SerializeField] AudioSource uiSFX;
     [SerializeField] AudioSource pickupSFX;
+    [SerializeField] AudioSource switchCharacterSFX;
 
     // Music source
     [SerializeField] AudioSource musicSFX;
@@ -39,8 +40,10 @@ public class SettingsMenu : MonoBehaviour
 
     void Start()
     {
+        // uncomment below to reset/delete player prefs
         // PlayerPrefs.DeleteAll();
         // PlayerPrefs.Save();
+
         seaSFXTrigger = FindObjectOfType<SeaSFXTrigger>();
         // Save main volume and music volume separately to fix saving issues
         if (!PlayerPrefs.HasKey("mainVolume"))
@@ -72,6 +75,7 @@ public class SettingsMenu : MonoBehaviour
         walkSFX.volume = mainVolumeSlider.value;
         uiSFX.volume = mainVolumeSlider.value;
         pickupSFX.volume = mainVolumeSlider.value;
+        switchCharacterSFX.volume = mainVolumeSlider.value;
         SaveSettings();
         CustomSoundRange();
     }
@@ -112,6 +116,7 @@ public class SettingsMenu : MonoBehaviour
         fireSFX.volume = mainVolumeSlider.value;
         walkSFX.volume = mainVolumeSlider.value - .2f;
         pickupSFX.volume = mainVolumeSlider.value;
+        switchCharacterSFX.volume = mainVolumeSlider.value;
         uiSFX.volume = mainVolumeSlider.value - .4f;
         musicSFX.volume = Mathf.Clamp(musicVolumeSlider.value * .25f, 0f, 1f);
     }

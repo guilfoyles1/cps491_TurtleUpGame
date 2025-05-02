@@ -1,57 +1,59 @@
 # Turtle Up Edutainment Game
 
 ## Overview  
-**Turtle Up** is an edutainment game developed for the Turtle Up recycling center in Kokrobite, Ghana. The game is designed to raise awareness about sea turtle conservation through interactive gameplay, combining education and entertainment. Players experience both human and turtle perspectives, learning about the impact of pollution on marine life and the importance of proper waste disposal.
+**Turtle Up** is an edutainment game developed for the Turtle Up recycling center in Kokrobite, Ghana. The game raises awareness about sea turtle conservation through interactive gameplay, combining education and entertainment. Players experience both human and turtle perspectives, learning about the impact of pollution on marine life and the importance of proper waste disposal.
 
 ---
 
 ## Features
 
 ### Two Gameplay Perspectives:
-- **Human (Level 1):** Collect and sort trash, navigate obstacles, and help maintain a clean beach environment. Properly dispose of items using a drag-and-drop inventory system and color-coded bins.
-- **Turtle (Level 2):** Scavenge for food while avoiding plastic waste, illustrating the challenges sea turtles face in polluted waters.
+- **Human (Level 1 - Team 2):** Collect and sort trash, navigate obstacles, and help maintain a clean beach environment. Properly dispose of items using a drag-and-drop inventory system and color-coded bins.
+- **Turtle (Level 2 - Team 1):** Scavenge for food while avoiding plastic waste and fishing nets, illustrating the challenges sea turtles face in polluted waters. Developed using an underwater-themed asset pack and unique swimming mechanics.
 
-### Character Customization:
-Players can select from five native turtle species and a variety of human avatars, reflecting the biodiversity of Ghana and allowing for representation and player choice.
+### Character Presets & Customization:
+Players can choose from five native turtle species and a variety of human avatars, reflecting the biodiversity of Ghana and promoting player choice and representation.
+
+### Stamina Bar Mechanic:
+Level 1 now includes a stamina bar that limits sprinting, encouraging strategic movement and pacing during trash collection.
 
 ### Inventory System:
-Tracks collected trash and allows for proper disposal at designated bins. Improper sorting will eventually trigger feedback to help guide player learning *(in progress)*.
+Tracks collected trash and allows for proper disposal at designated bins. Incorrect sorting triggers visual/audio feedback and affects player scoring.
 
 ### Educational Integration:
 Pop-up learning moments and visuals demonstrate conservation best practices. A tutorial sequence introduces objectives and controls for new players.
 
 ### Mobile Compatibility:
-Click-to-move functionality ensures a smooth experience on touchscreen devices. WASD and double-click-to-run are also supported for desktop play.
+Click-to-move functionality ensures a smooth experience on touchscreen devices. WASD and double-click-to-run are supported for desktop play.  
+In Level 2, a **hold-to-move** mechanic better reflects the turtle’s swimming behavior.
 
 ### Immersive Design Elements:
-Includes a day-night cycle, animated objects (fire pit, windmill, flowing stream), sound effects, and a mini-map to enhance gameplay and player engagement.
+Includes a day-night cycle, animated details (fire pit, windmill, flowing stream), sound effects, and a mini-map to enhance gameplay engagement.
 
 ---
 
 ## 🕹️ How to Play
-
-The game is divided into two levels, each offering a unique perspective and learning objective:
 
 ### 🧍🏾 Level 1: Human Perspective  
 **Objective:** Collect and sort trash to help keep the beach clean and protect sea life.
 
 **Controls:**
 - **WASD / Arrow Keys** – Move your character  
-- **Shift (Hold)** – Sprint  
+- **Shift (Hold)** – Sprint (drains stamina)
 - **Mouse Click / Tap** – Click-to-walk (single-click) or click-to-sprint (double-click)  
-- **Drag & Drop** – Move trash from your inventory to the appropriate recycling bin  
-- **Settings Button** – Pause the game and access volume/menu options  
+- **Drag & Drop** – Move trash from inventory to the correct recycling bin  
+- **Settings Button** – Pause the game and access menu options  
 
 ---
 
 ### 🐢 Level 2: Turtle Perspective  
-**Objective:** Navigate the ocean, avoid plastic waste, and scavenge for food while highlighting the impact of pollution on sea turtles.
+**Objective:** Navigate the ocean, avoid plastic waste, and scavenge for food while highlighting the impact of pollution on marine life.
 
 **Controls:**
 - **WASD / Arrow Keys** – Swim  
 - **Shift (Hold)** – Swim faster  
-- **Mouse Click / Tap** – Swim to selected spot (single-click) or swim quickly (double-click)  
-- **Settings Button** – Pause the game and access volume/menu options  
+- **Mouse Hold / Tap & Hold** – Swim toward held direction  
+- **Settings Button** – Pause the game and access menu options  
 
 ---
 
@@ -80,9 +82,9 @@ cd cps491group14
 ## 🚀 Development & Contributions
 
 ### Branching & Version Control
-- **Main Branch:** Stable version of the game.  
-- **Feature Branches:** Develop new features or fixes separately before merging.  
-- **Commit Guidelines:** Use clear commit messages (e.g., `fix: resolved collision bug in level 1`)  
+- **Main Branch:** Stable version of the game  
+- **Feature Branches:** New features or fixes developed separately  
+- **Commit Guidelines:** Clear commit messages (e.g., `fix: stamina bar not updating on mobile`)  
 
 ### Running the Game
 1. Open the project in Unity.  
@@ -103,72 +105,69 @@ Please create an issue on the repository with:
 ## 📈 Current Development Progress
 
 ### Implemented:
-- Player movement (WASD, arrow keys, click-to-move, double-click-to-run)  
-- Trash collection and inventory tracking  
-- Minimap, camera follow system, pause/settings menu  
-- Day-night cycle and animated environmental elements  
-- Updated main menu with new visuals, logo, and parallax design  
-- Trash bin logic with item tagging and sorting response  
-- Slot icon feedback for correct/incorrect sorting  
-- Initial deployment to GitHub Pages (WebGL)
+- Two-level gameplay (human and turtle perspectives)  
+- Trash collection, inventory tracking, and point-based scoring
+- Character preset selection and stamina bar mechanic
+- Minimap, day-night cycle, and interactive environment
+- Updated main menu and tutorial UI
+- Merged scenes into a single Unity project with level switching
+- Mobile optimization and WebGL deployment via GitHub Pages
 
 ### In Progress:
-- UI polish and visual feedback improvements  
-- Timer mechanic and simplified scoring logic  
-- Cross-team scene integration for Level 1 and Level 2  
-- Tutorial menu and pop-up overlays  
-- Character customization refinement
+- Final UI polish and accessibility improvements  
+- Deployment testing for iframe integration on TurtleUp.org
 
 ### Upcoming:
-- Final trash sorting logic and educational overlays  
-- Client review and testing  
-- Public deployment *(via GitHub Pages and/or iframe on TurtleUp.org)*  
-- Finalizing documentation for Capstone handoff  
+- Final presentation and project handoff to client  
 
 ---
 
 ## 🌐 Deployment Notes
 
-We are currently exploring how to make the game accessible through the [Turtle Up website](https://turtleup.org). Our goal is to ensure the game is playable on both desktop and mobile devices while keeping it secure and easy to update.
+We are making the game publicly accessible through GitHub Pages and exploring embedding on the [Turtle Up website](https://turtleup.org).
 
-### Current Hosting Options:
-- **GitHub Pages (WebGL Build):**  
-  You can view the current WebGL build here:  
-  [https://spearsz2.github.io/CPS491Group14self/](https://spearsz2.github.io/CPS491Group14self/)  
-  This uses Unity’s built-in WebGL exporter and is hosted via GitHub Pages.
+### Current Hosting:
+- **Playable Game (WebGL Build):**  
+  https://guilfoyles1.github.io/cps491_TurtleUpGame/
 
-- **Turtle Up Website (iframe):**  
-  We are in contact with the Turtle Up IT department (Mike) to assess the feasibility of embedding the game via iframe on the organization’s site.  
-  - **Pros:** Safer and easier to maintain  
-  - **Cons:** May cause issues with mobile compatibility  
-  Further testing and collaboration is ongoing.
+- **Project Homepage:**  
+  https://guilfoyles1.github.io/cps491group14_homepage/
+
+- **Turtle Up Website Deployment:**  
+  Discussed and tested with Turtle Up’s IT team.
 
 ### Notes for Future Developers:
-- WebGL builds must be placed in a `/Build` folder and linked to an `index.html`.
-- Some Unity features may not work in WebGL (e.g., certain shaders or intensive physics).
-- Use Unity’s compression and resolution settings to optimize for mobile.
-- If not using iframe, take care to sandbox the game to avoid any potential conflicts with the hosting website.
+- WebGL build must maintain the `/Build` folder structure.
+- Optimize mobile responsiveness through Unity settings.
+- Limit features that are unsupported in WebGL (e.g., threading, certain shaders).
 
 ---
 
 ## 🎨 Asset Credits
 
-We used public asset packs to build and customize visuals for this project. Below are the original sources:
+Assets were adapted from public packs with full licensing and attribution:
 
 - [Trash & Junk Asset Pack by BTL Games](https://btl-games.itch.io/trash-and-junk-asset-pack)  
 - [Sunnyside Tileset by Daniel Diggle](https://danieldiggle.itch.io/sunnyside)  
+- [Pixel Kit: Underwater Pack by Noa Calice](https://assetstore.unity.com/packages/2d/environments/pixel-kit-underwater-pack-193051)
 
-Assets were slightly modified for style consistency, optimization, and localization.
+Some assets were modified for consistency and localization.
 
 ---
 
 ## 👥 Team Members
 
+### Team 2 (Level 1 – Human Perspective)
+- **Shayna I. Guilfoyle** – Team Lead – guilfoyles1@udayton.edu  
 - **Shani D. Patel** – Backend Development – patels44@udayton.edu  
 - **Saif Ullah** – Backend Development – ullahs3@udayton.edu  
-- **Shayna I. Guilfoyle** – Team Lead – guilfoyles1@udayton.edu  
-- **Lazar Jevtic** – Frontend Design/Development – jevticl1@udayton.edu  
 - **Zachary R. Spears** – Backend Development – spearsz2@udayton.edu  
+- **Lazar Jevtic** – Frontend Design/Development – jevticl1@udayton.edu  
+
+### Team 1 (Level 2 – Turtle Perspective)
+- **Grant C. Lloyd** – Team Lead – lloydg1@udayton.edu  
+- **James S. Jarvis** – Backend Development – jarvisj1@udayton.edu  
+- **Kiran J. Khettry** – Backend Development – khettryk1@udayton.edu  
 
 ---
 
@@ -176,9 +175,9 @@ Assets were slightly modified for style consistency, optimization, and localizat
 
 © 2025 Turtle Up and the University of Dayton.
 
-This game was developed by University of Dayton Capstone students in collaboration with Turtle Up, a nonprofit organization. All game assets, code, and educational content were created specifically for Turtle Up’s use and are considered their intellectual property.
+This game was developed by University of Dayton Capstone students in collaboration with Turtle Up, a nonprofit organization. All assets, code, and educational content are considered Turtle Up’s intellectual property.
 
-No part of this project may be reproduced, modified, or distributed without express permission from Turtle Up.
+No part of this project may be reproduced, modified, or distributed without permission.
 
 **For inquiries, contact:** [info@turtleup.org](mailto:info@turtleup.org) or [guilfoyles1@udayton.edu](mailto:guilfoyles1@udayton.edu)
 

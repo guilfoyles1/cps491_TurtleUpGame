@@ -13,7 +13,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] GameObject paperBin;
     [SerializeField] GameObject trashBin;
     [SerializeField] GameObject slotPrefab;
-    [SerializeField] float maxSlotDimension = 70f;
+    private float maxSlotDimension = 67f;
     [SerializeField] int slotCount;
 
 

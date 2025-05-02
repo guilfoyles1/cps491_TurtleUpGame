@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 fileFormatVersion: 2
 guid: 5611c2cac0ec22a41a44d5891937de53
 TextureImporter:
@@ -166,6 +167,8 @@ TextureImporter:
   assetBundleName: 
   assetBundleVariant: 
 =======
+=======
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100
 fileFormatVersion: 2
 guid: 5611c2cac0ec22a41a44d5891937de53
 TextureImporter:
@@ -202,7 +205,11 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
+<<<<<<< HEAD
     filterMode: 1
+=======
+    filterMode: 0
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -240,7 +247,11 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+<<<<<<< HEAD
     textureCompression: 1
+=======
+    textureCompression: 0
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -332,4 +343,7 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+<<<<<<< HEAD
 >>>>>>> 170d36684f19b92e12997d1a1e72fd5da00dcd84
+=======
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100

@@ -1,0 +1,482 @@
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+<<<<<<< HEAD
+fileFormatVersion: 2
+guid: 2bfc6e9f973f8f949900aa4af6588c7b
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: idle_ne_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 25
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 737cace34ebdaa94b9d6dc8f1c424ad8
+      internalID: 1797690201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_ne_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 25
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e974f1813224d04eadbaeba256986da
+      internalID: 806360096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_ne_2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 25
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa4bd134b1714242acea9516e906236
+      internalID: 1791110034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: idle_ne_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 25
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 371b021ad1be83c4e8daa0a18f9bbd82
+      internalID: 1110965540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      idle_ne_0: 1797690201
+      idle_ne_1: 806360096
+      idle_ne_2: 1791110034
+      idle_ne_3: 1110965540
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+=======
+fileFormatVersion: 2
+guid: 2bfc6e9f973f8f949900aa4af6588c7b
+=======
+fileFormatVersion: 2
+guid: e5350dabed2d4924dbabe60198485ae2
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      name: idle_ne_0
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 25
+        width: 13
+        height: 18
+=======
+      name: idle_n_2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 64
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      spriteID: 737cace34ebdaa94b9d6dc8f1c424ad8
+      internalID: 1797690201
+=======
+      spriteID: 7e9d77f865d4d074687a11369d96e328
+      internalID: -1812356070
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      name: idle_ne_1
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 25
+        width: 14
+        height: 17
+=======
+      name: idle_n_2_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 96
+        height: 64
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      spriteID: 9e974f1813224d04eadbaeba256986da
+      internalID: 806360096
+=======
+      spriteID: 87ddc2194c9d2e54f938fdc48dafd155
+      internalID: 1067123535
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      name: idle_ne_2
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 25
+        width: 14
+        height: 17
+=======
+      name: idle_n_2_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 96
+        height: 64
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      spriteID: 2fa4bd134b1714242acea9516e906236
+      internalID: 1791110034
+=======
+      spriteID: 1fd90b05a7658f34a9e7c5a00e8f98fc
+      internalID: 1188868973
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      name: idle_ne_3
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 25
+        width: 13
+        height: 17
+=======
+      name: idle_n_2_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 96
+        height: 64
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      spriteID: 371b021ad1be83c4e8daa0a18f9bbd82
+      internalID: 1110965540
+=======
+      spriteID: 8c6712bcdbd564f48bd72542b7c0c503
+      internalID: -2108137618
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+      idle_ne_0: 1797690201
+      idle_ne_1: 806360096
+      idle_ne_2: 1791110034
+      idle_ne_3: 1110965540
+=======
+      idle_n_2_0: -1812356070
+      idle_n_2_1: 1067123535
+      idle_n_2_2: 1188868973
+      idle_n_2_3: -2108137618
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+<<<<<<< HEAD:Assets/Animations/4_way_sprite/idle/idle_ne.png.meta
+>>>>>>> 170d36684f19b92e12997d1a1e72fd5da00dcd84
+=======
+>>>>>>> 6af946e50caac2f9a9125b0a87e2d9965404b100:Assets/Animations/Player2_Anim/idle/idle_n_2.png.meta
