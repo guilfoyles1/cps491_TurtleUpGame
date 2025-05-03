@@ -157,8 +157,17 @@ Some assets were modified for consistency and localization.
 
 ## 👥 Team Members
 
+ 
 
-### Level 2 – Turtle Perspective team
+### Team 2 (Level 1 – Human Perspective)
+ 
+- **Shayna I. Guilfoyle** – Team Lead – guilfoyles1@udayton.edu  
+- **Shani D. Patel** – Backend Development – patels44@udayton.edu  
+- **Saif Ullah** – Backend Development – ullahs3@udayton.edu  
+- **Zachary R. Spears** – Backend Development – spearsz2@udayton.edu  
+- **Lazar Jevtic** – Frontend Design/Development – jevticl1@udayton.edu  
+
+### Team 1(Level 2 – Turtle Perspective)
 - **Grant C. Lloyd** – Team Lead – lloydg1@udayton.edu  
 - **James S. Jarvis** – Backend Development – jarvisj1@udayton.edu  
 - **Kiran J. Khettry** – Backend Development – khettryk1@udayton.edu  
